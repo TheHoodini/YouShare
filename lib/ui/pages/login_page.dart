@@ -1,40 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:proychat/video_widget.dart';
+import 'package:video_player/video_player.dart';
 //import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
-
   @override
   State<LoginPage> createState() => _LoginState();
-  
 }
 
 class _LoginState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: const Text(
-              'CHAT CON UBICACIÓN',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  fontWeight: FontWeight.bold),
-            ),
-            backgroundColor: Color(0xff004881),
-            centerTitle: true),
-        body: Center(
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                    key: _formKey,
-                    child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('Test',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
-                        ])))));
+        body: Stack(
+      children: [
+        const BackgroundVideoWidget(),
+        Center(
+            child: SimpleDialog(
+              backgroundColor: Colors.blue.withOpacity(0.7),
+                // Aquí puede ir el logo en vez del HOLA
+                // title: Image.asset("assets/logo.png", height: 120),
+                title: Text("HOLA"),
+                children: [
+              TextFormField(
+                  decoration: const InputDecoration(labelText: 'Username')),
+              const SizedBox(
+                height: 20.0,
+              ),
+              TextFormField(
+                  decoration: const InputDecoration(labelText: 'Password')),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size.fromHeight(42),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16))),
+                child: const Text("Submit"),)
+            ]))
+      ],
+    ));
   }
 
 }
