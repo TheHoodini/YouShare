@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proychat/video_widget.dart';
 import 'package:video_player/video_player.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,8 +29,10 @@ class _LoginState extends State<LoginPage> {
             child: FittedBox(
                 fit: BoxFit.cover,
                 child: SizedBox(
-                  width: _videoController.value.size?.width ?? 0,
-                  height: _videoController.value.size?.height ?? 0 ?? 0,
+                  //width: _videoController.value.size?.width ?? 0,
+                  //height: _videoController.value.size?.height ?? 0 ?? 0,
+                  width: _videoController.value.size.width,
+                  height: _videoController.value.size.height,
                   child: VideoPlayer(_videoController),
                 ))),
         Center(
@@ -41,7 +42,7 @@ class _LoginState extends State<LoginPage> {
                 // Aquí puede ir el logo en vez del Text()
                 // title: Image.asset("assets/logo.png", height: 120),
                 title: const Text('YouShare',
-                textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
                 children: [
@@ -59,36 +60,35 @@ class _LoginState extends State<LoginPage> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextFormField(
                     decoration: const InputDecoration(
-                  labelText: 'Name',
-                  floatingLabelBehavior: FloatingLabelBehavior.never
-                )),
+                        labelText: 'Name',
+                        floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
               // USERNAME
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextFormField(
                     decoration: const InputDecoration(
-                  labelText: 'Username',
-                  floatingLabelBehavior: FloatingLabelBehavior.never
-                )),
+                        labelText: 'Username',
+                        floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
               // PASSWORD
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextFormField(
+                    obscureText: true,
                     decoration: const InputDecoration(
-                  labelText: 'Password',
-                  floatingLabelBehavior: FloatingLabelBehavior.never
-                )),
+                        labelText: 'Password',
+                        floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
+              // TEXTO DE LOGIN
               const Padding(
                 padding: EdgeInsets.fromLTRB(14, 10, 0, 20),
                 child: Text('Already have an account? Login!',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline,
                         decorationColor: Colors.white)),
-                        
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
