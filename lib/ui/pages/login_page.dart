@@ -47,21 +47,52 @@ class _LoginState extends State<LoginPage> {
               const SizedBox(
                 height: 10.0,
               ),
-              TextFormField(
-                  decoration: const InputDecoration(labelText: 'Username')),
-              const SizedBox(
-                height: 10.0,
+              // USERNAME
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: TextFormField(
+                    decoration: InputDecoration(
+                  labelText: 'Username',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                )),
               ),
-              TextFormField(
-                  decoration: const InputDecoration(labelText: 'Password')),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    fixedSize: const Size.fromHeight(42),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16))),
-                child: const Text("Submit"),
-              )
+              // PASSWORD
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: TextFormField(
+                    decoration: const InputDecoration(
+                  labelText: 'Password',
+                )),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const SizedBox(
+                      width: 0.0,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size.fromHeight(40),
+                          backgroundColor: Color.fromARGB(255, 2, 155, 69),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16))),
+                      child: const Text("Submit",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    const SizedBox(
+                      width: 0.0,
+                    ),
+                  ]),
+                  const SizedBox(
+                height: 5.0,
+              ),
             ]))
       ],
     ));
