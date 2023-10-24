@@ -41,20 +41,35 @@ class _LoginState extends State<LoginPage> {
                 // Aquí puede ir el logo en vez del Text()
                 // title: Image.asset("assets/logo.png", height: 120),
                 title: const Text('YouShare',
+                textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
                 children: [
+              const Padding(
+                padding: EdgeInsets.fromLTRB(13, 0, 10, 0),
+                child: Text('Sign in',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
               const SizedBox(
                 height: 10.0,
               ),
-              // USERNAME
+              // NAME
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
+                  labelText: 'Name',
+                  floatingLabelBehavior: FloatingLabelBehavior.never
+                )),
+              ),
+              // USERNAME
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: TextFormField(
+                    decoration: const InputDecoration(
                   labelText: 'Username',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
+                  floatingLabelBehavior: FloatingLabelBehavior.never
                 )),
               ),
               // PASSWORD
@@ -63,10 +78,17 @@ class _LoginState extends State<LoginPage> {
                 child: TextFormField(
                     decoration: const InputDecoration(
                   labelText: 'Password',
+                  floatingLabelBehavior: FloatingLabelBehavior.never
                 )),
               ),
-              const SizedBox(
-                height: 20.0,
+              const Padding(
+                padding: EdgeInsets.fromLTRB(14, 10, 0, 20),
+                child: Text('Already have an account? Login!',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.white)),
+                        
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,6 +96,7 @@ class _LoginState extends State<LoginPage> {
                     const SizedBox(
                       width: 0.0,
                     ),
+                    // BOTÓN SIGN UP
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
@@ -81,7 +104,7 @@ class _LoginState extends State<LoginPage> {
                           backgroundColor: Color.fromARGB(255, 2, 155, 69),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16))),
-                      child: const Text("Submit",
+                      child: const Text("Sign In!",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
@@ -90,7 +113,7 @@ class _LoginState extends State<LoginPage> {
                       width: 0.0,
                     ),
                   ]),
-                  const SizedBox(
+              const SizedBox(
                 height: 5.0,
               ),
             ]))
