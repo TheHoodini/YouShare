@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class CreatePage extends StatefulWidget {
+  const CreatePage({super.key});
   @override
-  State<LoginPage> createState() => _LoginState();
+  State<CreatePage> createState() => _CreateState();
 }
 
-class _LoginState extends State<LoginPage> {
+class _CreateState extends State<CreatePage> {
   late final VideoPlayerController _videoController;
   @override
   void initState() {
@@ -49,9 +49,21 @@ class _LoginState extends State<LoginPage> {
                 children: [
               const Padding(
                 padding: EdgeInsets.fromLTRB(13, 0, 10, 0),
-                child: Text('Log in',
+                child: Text('Create account',
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              // NAME
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: TextFormField(
+                    decoration: const InputDecoration(
+                        labelText: 'Name',
+                        labelStyle: TextStyle(color: Color.fromARGB(255, 97, 97, 97)),
+                        floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
               // USERNAME
               Padding(
@@ -72,14 +84,14 @@ class _LoginState extends State<LoginPage> {
                         labelStyle: TextStyle(color: Color.fromARGB(255, 97, 97, 97)),
                         floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
-              // TEXTO DE LOGIN
+              // TEXTO DE CREAR CUENTA
               Padding(
                 padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
                 child: GestureDetector(
                   onTap: (){
-                    Get.toNamed('/create_page');
+                    Get.toNamed('/login_page');
                   },
-                  child: const Text('No account? click here to create one!',
+                  child: const Text('Already have an account? click here to Log in!',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -98,10 +110,10 @@ class _LoginState extends State<LoginPage> {
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size.fromHeight(40),
-                          backgroundColor: const Color.fromARGB(255, 2, 155, 69),
+                          backgroundColor: Color.fromARGB(255, 2, 155, 69),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16))),
-                      child: const Text("Log In!",
+                      child: const Text("Create!",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),

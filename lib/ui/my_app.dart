@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'pages/login_page.dart';
+import 'pages/create_page.dart';
 import 'pages/page1.dart';
 
 class MyApp extends StatelessWidget {
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/login_page",
       getPages: [
         GetPage(name: "/login_page", page: () => const LoginPage()),
+        GetPage(name: "/create_page", page: () => const CreatePage()),
         GetPage(name: "/page1", page: () => const Page1()),
       ],
     );
