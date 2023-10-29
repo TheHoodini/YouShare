@@ -2,9 +2,11 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 import 'pages/login_page.dart';
 import 'pages/create_page.dart';
-import 'pages/page1.dart';
+import 'pages/home_page.dart';
+import 'package:proychat/ui/pages/tabs/chat_tab.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,7 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: FlexThemeData.light(
         colors: const FlexSchemeColor(
-          primary: Color(0xff004881),
+          //primary: Color(0xff004881),
+          primary: Color.fromARGB(255, 28, 130, 173),
           primaryContainer: Color(0xffd0e4ff),
           secondary: Color(0xffac3306),
           secondaryContainer: Color(0xffffdbcf),
@@ -63,7 +66,8 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: "/login_page", page: () => const LoginPage()),
         GetPage(name: "/create_page", page: () => const CreatePage()),
-        GetPage(name: "/page1", page: () => const Page1()),
+        GetPage(name: "/home_page", page: () => const HomePage()),
+        GetPage(name: "/chat_tab", page: () => const ChatTab()),
       ],
     );
   }

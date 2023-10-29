@@ -89,7 +89,7 @@ class _CreateState extends State<CreatePage> {
                 padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
                 child: GestureDetector(
                   onTap: (){
-                    Get.toNamed('/login_page');
+                    Get.offNamed('/login_page');
                   },
                   child: const Text('Already have an account? click here to Log in!',
                     style: TextStyle(

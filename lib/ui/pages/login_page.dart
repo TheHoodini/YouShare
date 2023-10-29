@@ -77,7 +77,7 @@ class _LoginState extends State<LoginPage> {
                 padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
                 child: GestureDetector(
                   onTap: (){
-                    Get.toNamed('/create_page');
+                    Get.offNamed('/create_page');
                   },
                   child: const Text('No account? click here to create one!',
                     style: TextStyle(
@@ -95,7 +95,7 @@ class _LoginState extends State<LoginPage> {
                     ),
                     // BOTÓN SIGN UP
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Get.offNamed('/home_page'),
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size.fromHeight(40),
                           backgroundColor: const Color.fromARGB(255, 2, 155, 69),
