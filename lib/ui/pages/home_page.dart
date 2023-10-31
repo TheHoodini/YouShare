@@ -42,12 +42,15 @@ class _HomePageState extends State<HomePage> {
             ),
             child: NavigationBarTheme(
               data: const NavigationBarThemeData(
-                indicatorColor: Colors.transparent,
-                labelTextStyle: MaterialStatePropertyAll(
-                  TextStyle(color: Color.fromARGB(255, 28, 130, 173), fontWeight: FontWeight.bold)),
-                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected
-              ),
+                  indicatorColor: Color.fromARGB(0, 12, 12, 12),
+                  labelTextStyle: MaterialStatePropertyAll(TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Montserrat")),
+                  labelBehavior:
+                      NavigationDestinationLabelBehavior.onlyShowSelected),
               child: NavigationBar(
+                backgroundColor: Color.fromARGB(255, 16, 12, 12),
                 selectedIndex: index,
                 onDestinationSelected: (index) => {
                   setState(
@@ -56,16 +59,19 @@ class _HomePageState extends State<HomePage> {
                 },
                 destinations: const [
                   NavigationDestination(
-                      icon: Icon(Icons.location_on, color: Color.fromARGB(255, 202, 202, 216)),
-                      selectedIcon: Icon(Icons.location_on, color: Color.fromARGB(255, 28, 130, 173)),
-                      label: "Location"),
+                      icon: Icon(Icons.travel_explore,
+                      color: Color.fromARGB(255, 93, 93, 93)),
+                      selectedIcon: Icon(Icons.travel_explore, color: Colors.blue),
+                      label: "Map"),
                   NavigationDestination(
-                      icon: Icon(Icons.forum, color: Color.fromARGB(255, 202, 202, 216)),
-                      selectedIcon: Icon(Icons.forum, color: Color.fromARGB(255, 28, 130, 173)),
+                      icon: Icon(Icons.forum,
+                      color: Color.fromARGB(255, 93, 93, 93)),
+                      selectedIcon: Icon(Icons.forum, color: Colors.blue),
                       label: "Chat"),
                   NavigationDestination(
-                      icon: Icon(Icons.person_add, color: Color.fromARGB(255, 202, 202, 216)), 
-                      selectedIcon: Icon(Icons.person_add, color: Color.fromARGB(255, 28, 130, 173)),
+                      icon: Icon(Icons.person_add,
+                      color: Color.fromARGB(255, 93, 93, 93)),
+                      selectedIcon: Icon(Icons.person_add, color: Colors.blue),
                       label: "Add"),
                 ],
               ),

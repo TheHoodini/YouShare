@@ -42,6 +42,7 @@ dependencies:
   get: ^4.6.5
   flex_color_scheme: ^7.1.2
   google_fonts: ^4.0.4
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -83,10 +84,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+     - family: Montserrat
+       fonts:
+          - asset: assets/Montserrat-Medium.ttf
+            style: normal
+          - asset: assets/Montserrat-Bold.ttf
+            weight: 100
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

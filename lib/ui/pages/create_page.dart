@@ -51,7 +51,9 @@ class _CreateState extends State<CreatePage> {
                 padding: EdgeInsets.fromLTRB(13, 0, 10, 0),
                 child: Text('Create account',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Montserrat")),
               ),
               const SizedBox(
                 height: 10.0,
@@ -62,7 +64,10 @@ class _CreateState extends State<CreatePage> {
                 child: TextFormField(
                     decoration: const InputDecoration(
                         labelText: 'Name',
-                        labelStyle: TextStyle(color: Color.fromARGB(255, 97, 97, 97)),
+                        labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 97, 97, 97),
+                            fontStyle: FontStyle.normal,
+                            fontFamily: "Montserrat"),
                         floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
               // USERNAME
@@ -71,7 +76,10 @@ class _CreateState extends State<CreatePage> {
                 child: TextFormField(
                     decoration: const InputDecoration(
                         labelText: 'Username',
-                        labelStyle: TextStyle(color: Color.fromARGB(255, 97, 97, 97)),
+                        labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 97, 97, 97),
+                            fontStyle: FontStyle.normal,
+                            fontFamily: "Montserrat"),
                         floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
               // PASSWORD
@@ -81,24 +89,28 @@ class _CreateState extends State<CreatePage> {
                     obscureText: true,
                     decoration: const InputDecoration(
                         labelText: 'Password',
-                        labelStyle: TextStyle(color: Color.fromARGB(255, 97, 97, 97)),
+                        labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 97, 97, 97),
+                            fontStyle: FontStyle.normal,
+                            fontFamily: "Montserrat"),
                         floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
               // TEXTO DE CREAR CUENTA
               Padding(
-                padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
-                child: GestureDetector(
-                  onTap: (){
-                    Get.offNamed('/login_page');
-                  },
-                  child: const Text('Already have an account? click here to Log in!',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.white))
-                )
-              ),
+                  padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
+                  child: GestureDetector(
+                      onTap: () {
+                        Get.offNamed('/login_page');
+                      },
+                      child: const Text(
+                          'Already have an account? click here to Log in!',
+                          style: TextStyle(
+                              color: Colors.white,
+                              //fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.white,
+                              fontStyle: FontStyle.normal,
+                              fontFamily: "Montserrat")))),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -116,7 +128,9 @@ class _CreateState extends State<CreatePage> {
                       child: const Text("Create!",
                           style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.normal,
+                              fontFamily: "Montserrat")),
                     ),
                     const SizedBox(
                       width: 0.0,

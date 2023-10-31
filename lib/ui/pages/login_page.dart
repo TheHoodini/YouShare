@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:get/get.dart';
@@ -51,7 +53,9 @@ class _LoginState extends State<LoginPage> {
                 padding: EdgeInsets.fromLTRB(13, 0, 10, 0),
                 child: Text('Log in',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Montserrat")),
               ),
               // USERNAME
               Padding(
@@ -59,7 +63,9 @@ class _LoginState extends State<LoginPage> {
                 child: TextFormField(
                     decoration: const InputDecoration(
                         labelText: 'Username',
-                        labelStyle: TextStyle(color: Color.fromARGB(255, 97, 97, 97)),
+                        labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 97, 97, 97),
+                            fontFamily: "Montserrat"),
                         floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
               // PASSWORD
@@ -69,24 +75,24 @@ class _LoginState extends State<LoginPage> {
                     obscureText: true,
                     decoration: const InputDecoration(
                         labelText: 'Password',
-                        labelStyle: TextStyle(color: Color.fromARGB(255, 97, 97, 97)),
+                        labelStyle: TextStyle(
+                            color: Color.fromARGB(255, 97, 97, 97),
+                            fontFamily: "Montserrat"),
                         floatingLabelBehavior: FloatingLabelBehavior.never)),
               ),
               // TEXTO DE LOGIN
               Padding(
-                padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
-                child: GestureDetector(
-                  onTap: (){
-                    Get.offNamed('/create_page');
-                  },
-                  child: const Text('No account? click here to create one!',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.white))
-                )
-              ),
+                  padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
+                  child: GestureDetector(
+                      onTap: () {
+                        Get.offNamed('/create_page');
+                      },
+                      child: const Text('No account? click here to create one!',
+                          style: TextStyle(
+                              color: Colors.white,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.white,
+                              fontFamily: "Montserrat")))),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -98,13 +104,15 @@ class _LoginState extends State<LoginPage> {
                       onPressed: () => Get.offNamed('/home_page'),
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size.fromHeight(40),
-                          backgroundColor: const Color.fromARGB(255, 2, 155, 69),
+                          backgroundColor:
+                              const Color.fromARGB(255, 2, 155, 69),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16))),
                       child: const Text("Log In!",
                           style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Montserrat")),
                     ),
                     const SizedBox(
                       width: 0.0,
