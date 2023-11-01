@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                   labelBehavior:
                       NavigationDestinationLabelBehavior.onlyShowSelected),
               child: NavigationBar(
-                backgroundColor: Color.fromARGB(255, 16, 12, 12),
+                backgroundColor: Color.fromARGB(255, 4, 4, 20),
                 selectedIndex: index,
                 onDestinationSelected: (index) => {
                   setState(
@@ -60,19 +60,20 @@ class _HomePageState extends State<HomePage> {
                 destinations: const [
                   NavigationDestination(
                       icon: Icon(Icons.travel_explore,
-                      color: Color.fromARGB(255, 93, 93, 93)),
+                      color: Color.fromARGB(255, 61, 61, 61)),
                       selectedIcon: Icon(Icons.travel_explore, color: Colors.blue),
                       label: "Map"),
                   NavigationDestination(
                       icon: Icon(Icons.forum,
-                      color: Color.fromARGB(255, 93, 93, 93)),
+                      //93
+                      color: Color.fromARGB(255, 61, 61, 61)),
                       selectedIcon: Icon(Icons.forum, color: Colors.blue),
                       label: "Chat"),
                   NavigationDestination(
-                      icon: Icon(Icons.person_add,
-                      color: Color.fromARGB(255, 93, 93, 93)),
-                      selectedIcon: Icon(Icons.person_add, color: Colors.blue),
-                      label: "Add"),
+                      icon: Icon(Icons.settings,
+                      color: Color.fromARGB(255, 61, 61, 61)),
+                      selectedIcon: Icon(Icons.settings, color: Colors.blue),
+                      label: "Settings"),
                 ],
               ),
             ),

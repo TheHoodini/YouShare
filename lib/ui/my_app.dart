@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: FlexThemeData.light(
         colors: const FlexSchemeColor(
-          //primary: Color(0xff004881),
-          primary: Color.fromARGB(255, 28, 130, 173),
+          primary: Color(0xff004881),
+          //primary: Color.fromARGB(255, 28, 130, 173),
           primaryContainer: Color(0xffd0e4ff),
           secondary: Color(0xffac3306),
           secondaryContainer: Color(0xffffdbcf),

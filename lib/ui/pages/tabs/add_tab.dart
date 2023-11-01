@@ -13,9 +13,16 @@ class _AddTabState extends State<AddTab> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: Colors.blue,
-    body: Center(
-      child: Text("Add tab", style: TextStyle(color: Colors.black))
-    )
-  );
+      backgroundColor: Colors.blue,
+      appBar: AppBar(
+          title: const Text(
+            'YouShare',
+            style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontFamily: 'Montserrat'),
+          ),
+          backgroundColor: Color.fromARGB(255, 2, 2, 48),
+          centerTitle: true),
+      body: Center(
+          child: Text("Add tab", style: TextStyle(color: Colors.black))));
 }
