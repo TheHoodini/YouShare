@@ -10,9 +10,9 @@ class MapTab extends StatefulWidget {
 
 class _MapTabState extends State<MapTab> {
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 51, 124),
-        body: const Center(
+  Widget build(BuildContext context) => const Scaffold(
+        backgroundColor: Color.fromARGB(255, 117, 161, 150),
+        body: Center(
           child: Text(
             "Map tab",
             style: TextStyle(color: Colors.black),

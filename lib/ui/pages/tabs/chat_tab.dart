@@ -12,12 +12,12 @@ class _ChatTabState extends State<ChatTab> {
   int index = 0;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 124, 93),
+  Widget build(BuildContext context) => const Scaffold(
+        backgroundColor: Color.fromARGB(255, 2, 11, 44),
         body: Center(
           child: Text(
             "Chat tab",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.white),
           ),
         ),
       );

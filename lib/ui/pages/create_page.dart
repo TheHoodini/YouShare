@@ -140,7 +140,7 @@ class _CreateState extends State<CreatePage> {
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size.fromHeight(40),
-                          backgroundColor: Color.fromARGB(255, 2, 155, 69),
+                          backgroundColor: const Color.fromARGB(255, 2, 155, 69),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16))),
                       child: const Text("Create!",

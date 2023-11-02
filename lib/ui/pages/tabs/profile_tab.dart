@@ -1,7 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -13,11 +12,12 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   final double coverHeight = 170;
   final double profileHeight = 144;
+  final Color uiColor = const Color.fromARGB(255, 2, 11, 44);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 12, 12, 12),
+      backgroundColor: uiColor,
       body: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -51,11 +51,12 @@ class _ProfileTabState extends State<ProfileTab> {
 
   Widget buildProfileImage() => CircleAvatar(
         radius: profileHeight / 2,
-        backgroundColor: const Color.fromARGB(255, 12, 12, 12),
+        backgroundColor: uiColor,
         child: Image.asset("../../../../assets/user.png", height: 130),
       );
 
   buildContent() => Column(
+        // TEXTOS DEL NOMBRE DE USUARIO
         children: [
           const Text('Test User',
               textAlign: TextAlign.center,
@@ -65,10 +66,13 @@ class _ProfileTabState extends State<ProfileTab> {
                   fontWeight: FontWeight.bold)),
           const Text('@UserMan08',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontFamily: "Montserrat")),
+              style: TextStyle(
+                  color: Colors.white, 
+                  fontFamily: "Montserrat")),
           const SizedBox(
             height: 30,
           ),
+          // ---------------------------
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -91,8 +95,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         Icons.logout,
                         color: Colors.white,
                       ),
-                      SizedBox(
-                          width: 8),
+                      SizedBox(width: 8),
                       Text(
                         "Log Out",
                         style: TextStyle(

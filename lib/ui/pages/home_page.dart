@@ -13,9 +13,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
   int currentIndex = 0;
-  final screens = [
+
+  final screens = const [
     MapTab(),
     ChatTab(),
     ProfileTab(),
@@ -26,6 +27,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
+    Color uiColor = const Color.fromARGB(255, 0, 51, 124);
+    Color iconColor = Colors.white;
+    Color selIconColor = Colors.white;
 
     // Actualizar el ícono del Floating Button
     if (currentIndex == 0) {
@@ -41,12 +45,12 @@ class _HomePageState extends State<HomePage> {
             'YouShare',
             style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
           ),
-          backgroundColor: Color.fromARGB(255, 2, 2, 48),
+          backgroundColor: uiColor,
           centerTitle: true),
       // Utiliza PageView en lugar de un solo widget para cambiar las páginas
       body: PageView(
         controller: _pageController,
-        //physics: NeverScrollableScrollPhysics(), // No deslizamiento manual
+        physics: const NeverScrollableScrollPhysics(), // No deslizamiento manual
         children: screens,
       ),
       bottomNavigationBar: Container(
@@ -54,7 +58,7 @@ class _HomePageState extends State<HomePage> {
         height: 70,
         decoration: BoxDecoration(
           //color: Colors.white,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Color.fromARGB(120, 0, 0, 0),
               spreadRadius: 0,
@@ -71,10 +75,10 @@ class _HomePageState extends State<HomePage> {
             bottomRight: Radius.circular(30.0),
           ),
           child: NavigationBarTheme(
-            data: const NavigationBarThemeData(
-              indicatorColor: Color.fromARGB(0, 13, 42, 158),
+            data: NavigationBarThemeData(
+              indicatorColor: const Color.fromARGB(0, 13, 42, 158),
               labelTextStyle: MaterialStatePropertyAll(TextStyle(
-                color: Colors.blue,
+                color: selIconColor,
                 fontWeight: FontWeight.bold,
                 fontFamily: "Montserrat",
               )),
@@ -82,32 +86,32 @@ class _HomePageState extends State<HomePage> {
                   NavigationDestinationLabelBehavior.onlyShowSelected,
             ),
             child: NavigationBar(
-              backgroundColor: Color.fromARGB(255, 1, 1, 28),
+              backgroundColor: uiColor,
               selectedIndex: currentIndex,
               onDestinationSelected: (index) {
                 setState(() {
                   currentIndex = index;
                   _pageController.animateToPage(
                     index,
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.ease,
                   );
                 });
               },
-              destinations: const [
+              destinations: [
                 NavigationDestination(
-                  icon: Icon(Icons.travel_explore, color: Colors.grey),
-                  selectedIcon: Icon(Icons.travel_explore, color: Colors.blue),
+                  icon: Icon(Icons.map_outlined, color: iconColor),
+                  selectedIcon: Icon(Icons.map, color: selIconColor),
                   label: "Map",
                 ),
                 NavigationDestination(
-                  icon: Icon(Icons.forum, color: Colors.grey),
-                  selectedIcon: Icon(Icons.forum, color: Colors.blue),
+                  icon: Icon(Icons.forum_outlined, color: iconColor),
+                  selectedIcon: Icon(Icons.forum, color: selIconColor),
                   label: "Chat",
                 ),
                 NavigationDestination(
-                  icon: Icon(Icons.account_circle, color: Colors.grey),
-                  selectedIcon: Icon(Icons.account_circle, color: Colors.blue),
+                  icon: Icon(Icons.account_circle_outlined, color: iconColor),
+                  selectedIcon: Icon(Icons.account_circle, color: selIconColor),
                   label: "Profile",
                 ),
               ],
@@ -126,8 +130,8 @@ class _HomePageState extends State<HomePage> {
                     print("chat");
                   }
                 },
+                backgroundColor: const Color.fromARGB(255, 2, 155, 69),
                 child: Icon(currentFloatingButtonIcon),
-                backgroundColor: Color.fromARGB(255, 2, 155, 69),
               ),
             )
           : null,
