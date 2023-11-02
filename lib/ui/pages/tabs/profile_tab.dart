@@ -1,22 +1,22 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 
-class ChatTab extends StatefulWidget {
-  const ChatTab({super.key});
+class ProfileTab extends StatefulWidget {
+  const ProfileTab({super.key});
 
   @override
-  State<ChatTab> createState() => _ChatTabState();
+  State<ProfileTab> createState() => _ProfileTabState();
 }
 
-class _ChatTabState extends State<ChatTab> {
+class _ProfileTabState extends State<ProfileTab> {
   int index = 0;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 124, 93),
+        backgroundColor: Color.fromARGB(255, 138, 39, 11),
         body: Center(
           child: Text(
-            "Chat tab",
+            "Add tab",
             style: TextStyle(color: Colors.black),
           ),
         ),

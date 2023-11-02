@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'package:get/get.dart';
 
@@ -47,7 +48,7 @@ class _LoginState extends State<LoginPage> {
                 title: const Text('YouShare',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
+                        color: Colors.white, fontFamily: "Montserrat")),
                 children: [
               const Padding(
                 padding: EdgeInsets.fromLTRB(13, 0, 10, 0),
@@ -61,7 +62,12 @@ class _LoginState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextFormField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
                     decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.alternate_email,
+                            color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Username',
                         labelStyle: TextStyle(
                             color: Color.fromARGB(255, 97, 97, 97),
@@ -74,6 +80,8 @@ class _LoginState extends State<LoginPage> {
                 child: TextFormField(
                     obscureText: true,
                     decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.lock,
+                            color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Password',
                         labelStyle: TextStyle(
                             color: Color.fromARGB(255, 97, 97, 97),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'package:get/get.dart';
 
@@ -63,6 +64,8 @@ class _CreateState extends State<CreatePage> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextFormField(
                     decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.person,
+                            color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Name',
                         labelStyle: TextStyle(
                             color: Color.fromARGB(255, 97, 97, 97),
@@ -74,7 +77,12 @@ class _CreateState extends State<CreatePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextFormField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
                     decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.alternate_email,
+                            color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Username',
                         labelStyle: TextStyle(
                             color: Color.fromARGB(255, 97, 97, 97),
@@ -88,6 +96,8 @@ class _CreateState extends State<CreatePage> {
                 child: TextFormField(
                     obscureText: true,
                     decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.lock,
+                            color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Password',
                         labelStyle: TextStyle(
                             color: Color.fromARGB(255, 97, 97, 97),
