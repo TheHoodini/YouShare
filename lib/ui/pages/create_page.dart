@@ -63,8 +63,11 @@ class _CreateState extends State<CreatePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextFormField(
+                    style: const TextStyle(fontFamily: "Montserrat"),
                     decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.person,
+                        filled: true,
+                        fillColor: Colors.white,
+                        prefixIcon: Icon(Icons.person,
                             color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Name',
                         labelStyle: TextStyle(
@@ -77,11 +80,14 @@ class _CreateState extends State<CreatePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextFormField(
+                    style: const TextStyle(fontFamily: "Montserrat"),
                     inputFormatters: [
                       FilteringTextInputFormatter.deny(RegExp(r'\s')),
                     ],
                     decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.alternate_email,
+                        filled: true,
+                        fillColor: Colors.white,
+                        prefixIcon: Icon(Icons.alternate_email,
                             color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Username',
                         labelStyle: TextStyle(
@@ -96,7 +102,9 @@ class _CreateState extends State<CreatePage> {
                 child: TextFormField(
                     obscureText: true,
                     decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.lock,
+                        filled: true,
+                        fillColor: Colors.white,
+                        prefixIcon: Icon(Icons.lock,
                             color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Password',
                         labelStyle: TextStyle(

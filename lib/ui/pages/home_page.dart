@@ -21,20 +21,28 @@ class _HomePageState extends State<HomePage> {
     ProfileTab(),
   ];
 
+  IconData currentFloatingButtonIcon = Icons.location_on;
+
   @override
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
+
+    // Actualizar el ícono del Floating Button
+    if (currentIndex == 0) {
+      currentFloatingButtonIcon = Icons.location_on;
+    } else if (currentIndex == 1) {
+      currentFloatingButtonIcon = Icons.person_add;
+    }
+
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-            title: const Text(
-              'YouShare',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  fontFamily: 'Montserrat'),
-            ),
-            backgroundColor: Color.fromARGB(255, 2, 2, 48),
-            centerTitle: true),
+          title: const Text(
+            'YouShare',
+            style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
+          ),
+          backgroundColor: Color.fromARGB(255, 2, 2, 48),
+          centerTitle: true),
       // Utiliza PageView en lugar de un solo widget para cambiar las páginas
       body: PageView(
         controller: _pageController,
@@ -70,7 +78,8 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.bold,
                 fontFamily: "Montserrat",
               )),
-              labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+              labelBehavior:
+                  NavigationDestinationLabelBehavior.onlyShowSelected,
             ),
             child: NavigationBar(
               backgroundColor: Color.fromARGB(255, 1, 1, 28),
@@ -106,6 +115,24 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      floatingActionButton: currentIndex != 2
+          ? Padding(
+              padding: const EdgeInsets.only(top: 10, right: 20),
+              child: FloatingActionButton(
+                onPressed: () {
+                  if (currentIndex == 0) {
+                    print("map");
+                  } else if (currentIndex == 1) {
+                    print("chat");
+                  }
+                },
+                child: Icon(currentFloatingButtonIcon),
+                backgroundColor: Color.fromARGB(255, 2, 155, 69),
+              ),
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
   }
 }

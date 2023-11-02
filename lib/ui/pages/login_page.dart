@@ -62,10 +62,13 @@ class _LoginState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextFormField(
+                    style: const TextStyle(fontFamily: "Montserrat"),
                     inputFormatters: [
                       FilteringTextInputFormatter.deny(RegExp(r'\s')),
                     ],
                     decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
                         prefixIcon: Icon(Icons.alternate_email,
                             color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Username',
@@ -80,6 +83,8 @@ class _LoginState extends State<LoginPage> {
                 child: TextFormField(
                     obscureText: true,
                     decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
                         prefixIcon: Icon(Icons.lock,
                             color: Color.fromARGB(255, 97, 97, 97)),
                         labelText: 'Password',
