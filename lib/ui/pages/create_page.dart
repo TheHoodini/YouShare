@@ -46,7 +46,7 @@ class _CreateState extends State<CreatePage> {
                 title: const Text('YouShare',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
+                        color: Colors.white, fontFamily: "Montserrat")),
                 children: [
               const Padding(
                 padding: EdgeInsets.fromLTRB(13, 0, 10, 0),
@@ -137,7 +137,7 @@ class _CreateState extends State<CreatePage> {
                     ),
                     // BOTÓN SIGN UP
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Get.offNamed('/home_page'),
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size.fromHeight(40),
                           backgroundColor: const Color.fromARGB(255, 2, 155, 69),
