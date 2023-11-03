@@ -9,16 +9,23 @@ class ChatTab extends StatefulWidget {
 }
 
 class _ChatTabState extends State<ChatTab> {
-  int index = 0;
+  Color mainTextColor = Colors.white;
 
   @override
-  Widget build(BuildContext context) => const Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         backgroundColor: Color.fromARGB(255, 2, 11, 44),
         body: Center(
-          child: Text(
-            "Chat tab",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+            child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Press ',
+                style:
+                    TextStyle(color: mainTextColor, fontFamily: "Montserrat")),
+            Icon(Icons.person_add, color: mainTextColor),
+            Text(' to add someone here!',
+                style:
+                    TextStyle(color: mainTextColor, fontFamily: "Montserrat")),
+          ],
+        )),
       );
 }

@@ -41,16 +41,25 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-          title: const Text(
-            'YouShare',
-            style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
+        backgroundColor: uiColor,
+        centerTitle: true,
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(0.1), // Altura de la línea
+          child: Divider(
+            color: Color.fromARGB(80, 255, 255, 255), // Color de la línea
+            height: 0.0, // Grosor de la línea
           ),
-          backgroundColor: uiColor,
-          centerTitle: true),
+        ),
+        title: const Text(
+          'YouShare',
+          style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
+        ),
+      ),
       // Utiliza PageView en lugar de un solo widget para cambiar las páginas
       body: PageView(
         controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(), // No deslizamiento manual
+        physics:
+            const NeverScrollableScrollPhysics(), // No deslizamiento manual
         children: screens,
       ),
       bottomNavigationBar: Container(

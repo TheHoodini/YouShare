@@ -64,6 +64,7 @@ class _CreateState extends State<CreatePage> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextFormField(
                     style: const TextStyle(fontFamily: "Montserrat"),
+                    inputFormatters: [LengthLimitingTextInputFormatter(20)],
                     decoration: const InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
@@ -82,7 +83,8 @@ class _CreateState extends State<CreatePage> {
                 child: TextFormField(
                     style: const TextStyle(fontFamily: "Montserrat"),
                     inputFormatters: [
-                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
+                      LengthLimitingTextInputFormatter(20)
                     ],
                     decoration: const InputDecoration(
                         filled: true,
@@ -101,6 +103,7 @@ class _CreateState extends State<CreatePage> {
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: TextFormField(
                     obscureText: true,
+                    inputFormatters: [LengthLimitingTextInputFormatter(30)],
                     decoration: const InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
@@ -140,7 +143,8 @@ class _CreateState extends State<CreatePage> {
                       onPressed: () => Get.offNamed('/home_page'),
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size.fromHeight(40),
-                          backgroundColor: const Color.fromARGB(255, 2, 155, 69),
+                          backgroundColor:
+                              const Color.fromARGB(255, 2, 155, 69),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16))),
                       child: const Text("Create!",
