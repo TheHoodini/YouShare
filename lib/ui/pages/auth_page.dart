@@ -26,6 +26,8 @@ class _AuthPageState extends State<AuthPage> {
       });
   }
 
+  final screens = <Widget>[];
+  
   @override
   void initState() {
     super.initState();
@@ -38,8 +40,6 @@ class _AuthPageState extends State<AuthPage> {
       mainPageIndex = newIndex;
     });
   }
-
-  final screens = <Widget>[];
 
   @override
   Widget build(BuildContext context) {
