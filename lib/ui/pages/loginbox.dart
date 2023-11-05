@@ -1,18 +1,16 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class LoginTab extends StatefulWidget {
+class LoginBox extends StatefulWidget {
   final Function(int) changeMainPageIndex;
-  const LoginTab({super.key, required this.changeMainPageIndex});
+  const LoginBox({super.key, required this.changeMainPageIndex});
 
   @override
-  State<LoginTab> createState() => _LoginTabState();
+  State<LoginBox> createState() => _LoginBoxState();
 }
 
-class _LoginTabState extends State<LoginTab> {
+class _LoginBoxState extends State<LoginBox> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

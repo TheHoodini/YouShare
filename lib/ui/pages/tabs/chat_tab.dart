@@ -13,19 +13,20 @@ class _ChatTabState extends State<ChatTab> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Color.fromARGB(255, 2, 11, 44),
+        backgroundColor: const Color.fromARGB(255, 2, 11, 44),
         body: Center(
-            child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('Press ',
-                style:
-                    TextStyle(color: mainTextColor, fontFamily: "Montserrat")),
-            Icon(Icons.person_add, color: mainTextColor),
-            Text(' to add someone here!',
-                style:
-                    TextStyle(color: mainTextColor, fontFamily: "Montserrat")),
-          ],
-        )),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Press ',
+                  style: TextStyle(
+                      color: mainTextColor, fontFamily: "Montserrat")),
+              Icon(Icons.person_add, color: mainTextColor),
+              Text(' to add someone here!',
+                  style: TextStyle(
+                      color: mainTextColor, fontFamily: "Montserrat")),
+            ],
+          ),
+        ),
       );
 }

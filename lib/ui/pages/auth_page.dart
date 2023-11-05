@@ -26,11 +26,13 @@ class _AuthPageState extends State<AuthPage> {
       });
   }
 
+  final screens = <Widget>[];
+
   @override
   void initState() {
     super.initState();
-    screens.add(LoginTab(changeMainPageIndex: changeMainPageIndex));
-    screens.add(CreateTab(changeMainPageIndex: changeMainPageIndex));
+    screens.add(LoginBox(changeMainPageIndex: changeMainPageIndex));
+    screens.add(CreateBox(changeMainPageIndex: changeMainPageIndex));
   }
 
   void changeMainPageIndex(int newIndex) {
@@ -39,27 +41,26 @@ class _AuthPageState extends State<AuthPage> {
     });
   }
 
-  final screens = <Widget>[];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: [
-        SizedBox.expand(
-            child: FittedBox(
-                fit: BoxFit.cover,
-                child: SizedBox(
-                  //width: _videoController.value.size?.width ?? 0,
-                  //height: _videoController.value.size?.height ?? 0 ?? 0,
-                  width: _videoController.value.size.width,
-                  height: _videoController.value.size.height,
-                  child: VideoPlayer(_videoController),
-                ))),
-        Center(
-          child: screens[mainPageIndex],
-        ),
-      ],
-    ));
+      body: Stack(
+        children: [
+          SizedBox.expand(
+              child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: SizedBox(
+                    //width: _videoController.value.size?.width ?? 0,
+                    //height: _videoController.value.size?.height ?? 0 ?? 0,
+                    width: _videoController.value.size.width,
+                    height: _videoController.value.size.height,
+                    child: VideoPlayer(_videoController),
+                  ))),
+          Center(
+            child: screens[mainPageIndex],
+          ),
+        ],
+      ),
+    );
   }
 }

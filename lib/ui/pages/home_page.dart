@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 // Tabs
 import 'package:proychat/ui/pages/tabs/map_tab.dart';
@@ -137,6 +139,7 @@ class _HomePageState extends State<HomePage> {
                     print("map");
                   } else if (currentIndex == 1) {
                     print("chat");
+                    Get.toNamed('/add_page');
                   }
                 },
                 backgroundColor: const Color.fromARGB(255, 2, 155, 69),

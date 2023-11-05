@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/pages/add_page.dart';
 import 'package:proychat/ui/pages/auth_page.dart';
 
 import 'pages/home_page.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: "/auth_page", page: () => const AuthPage()),
         GetPage(name: "/home_page", page: () => const HomePage()),
+        GetPage(name: "/add_page", page: () => const AddPage()),
       ],
     );
   }
