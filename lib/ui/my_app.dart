@@ -1,12 +1,9 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/pages/auth_page.dart';
 
-
-import 'pages/login_page.dart';
-import 'pages/create_page.dart';
 import 'pages/home_page.dart';
-import 'package:proychat/ui/pages/tabs/chat_tab.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -62,12 +59,10 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.light,
       //todo: Implement name routing (initialRoute and getPages parameters)
-      initialRoute: "/login_page",
+      initialRoute: "/auth_page",
       getPages: [
-        GetPage(name: "/login_page", page: () => const LoginPage()),
-        GetPage(name: "/create_page", page: () => const CreatePage()),
+        GetPage(name: "/auth_page", page: () => const AuthPage()),
         GetPage(name: "/home_page", page: () => const HomePage()),
-        GetPage(name: "/chat_tab", page: () => const ChatTab()),
       ],
     );
   }

@@ -81,7 +81,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 ),
                 // BOTÓN LOG OUT
                 ElevatedButton(
-                  onPressed: () => Get.offNamed('/login_page'),
+                  onPressed: () => Get.offNamed('/auth_page'),
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size.fromHeight(40),
                     backgroundColor: const Color.fromARGB(255, 2, 155, 69),
