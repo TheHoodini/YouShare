@@ -69,7 +69,7 @@ class _LoginBoxState extends State<LoginBox> {
                           fontFamily: "Montserrat"),
                       floatingLabelBehavior: FloatingLabelBehavior.never)),
             ),
-            // TEXTO DE LOGIN
+            // TEXTO DE CREAR CUENTA
             Padding(
                 padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
                 child: GestureDetector(
@@ -89,7 +89,7 @@ class _LoginBoxState extends State<LoginBox> {
                   const SizedBox(
                     width: 0.0,
                   ),
-                  // BOTÓN SIGN UP
+                  // BOTÓN LOG IN
                   ElevatedButton(
                     onPressed: () => Get.offNamed('/home_page'),
                     style: ElevatedButton.styleFrom(

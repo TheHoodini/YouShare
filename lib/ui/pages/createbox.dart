@@ -109,7 +109,7 @@ class _CreateBoxState extends State<CreateBox> {
                           fontFamily: "Montserrat"),
                       floatingLabelBehavior: FloatingLabelBehavior.never)),
             ),
-            // TEXTO DE CREAR CUENTA
+            // TEXTO DE LOGIN
             Padding(
                 padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
                 child: GestureDetector(
@@ -131,7 +131,7 @@ class _CreateBoxState extends State<CreateBox> {
                   const SizedBox(
                     width: 0.0,
                   ),
-                  // BOTÓN SIGN UP
+                  // BOTÓN CREAR CUENTA
                   ElevatedButton(
                     onPressed: () {
                       Get.offNamed('/home_page');
