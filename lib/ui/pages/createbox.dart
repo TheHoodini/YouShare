@@ -61,7 +61,9 @@ class _CreateBoxState extends State<CreateBox> {
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: TextFormField(
                   style: const TextStyle(fontFamily: "Montserrat"),
-                  //inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")), LengthLimitingTextInputFormatter(20)],
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
+                  ],
                   decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -120,7 +122,6 @@ class _CreateBoxState extends State<CreateBox> {
                         'Already have an account? click here to Log in!',
                         style: TextStyle(
                             color: Colors.white,
-                            //fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,
                             decorationColor: Colors.white,
                             fontStyle: FontStyle.normal,

@@ -137,7 +137,6 @@ class _HomePageState extends State<HomePage> {
                   if (currentIndex == 0) {
                     print("map");
                   } else if (currentIndex == 1) {
-                    print("chat");
                     Get.toNamed('/add_page');
                   }
                 },

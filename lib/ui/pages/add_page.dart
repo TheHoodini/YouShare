@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -20,7 +21,7 @@ class _AddPageState extends State<AddPage> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: const Color.fromARGB(255, 0, 51, 124),
-        centerTitle: true,
+        //centerTitle: true,
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(0.1), // Altura de la línea
           child: Divider(
@@ -45,19 +46,19 @@ class _AddPageState extends State<AddPage> {
                   padding: EdgeInsets.fromLTRB(30, 10, 30, 0),
                   child: Align(
                     alignment: Alignment.centerLeft,
+                    // TEXTO
                     child: Text("Enter the contact's username",
                         style: TextStyle(
                             color: Colors.white, fontFamily: "Montserrat")),
                   ),
                 ),
+                // TEXTFIELDFORM DE USERNAME
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
                   child: TextFormField(
                       style: const TextStyle(fontFamily: "Montserrat"),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp("[0-9a-zA-Z]")),
-                        LengthLimitingTextInputFormatter(20)
+                        FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
                       ],
                       decoration: const InputDecoration(
                           filled: true,
@@ -74,8 +75,12 @@ class _AddPageState extends State<AddPage> {
                   height: 25,
                 ),
                 Flexible(
+                  // BOTÓN DE GUARDAR CONTACTO/USUARIO
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                      print("contact added");
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 2, 155, 69)),
                     child: const Text('Save',
