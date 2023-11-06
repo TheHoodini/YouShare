@@ -36,21 +36,17 @@ class _LoginBoxState extends State<LoginBox> {
                       fontWeight: FontWeight.bold,
                       fontFamily: "Montserrat")),
             ),
-            // USERNAME
+            // EMAIL
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: TextFormField(
                   style: const TextStyle(fontFamily: "Montserrat"),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
-                    LengthLimitingTextInputFormatter(20)
-                  ],
                   decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.alternate_email,
+                      prefixIcon: Icon(Icons.mail,
                           color: Color.fromARGB(255, 97, 97, 97)),
-                      labelText: 'Username',
+                      labelText: 'Email',
                       labelStyle: TextStyle(
                           color: Color.fromARGB(255, 97, 97, 97),
                           fontFamily: "Montserrat"),
@@ -58,10 +54,10 @@ class _LoginBoxState extends State<LoginBox> {
             ),
             // PASSWORD
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: TextFormField(
                   obscureText: true,
-                  inputFormatters: [LengthLimitingTextInputFormatter(29)],
+                  //inputFormatters: [LengthLimitingTextInputFormatter(29)],
                   decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
