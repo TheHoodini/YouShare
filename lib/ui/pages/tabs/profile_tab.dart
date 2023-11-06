@@ -1,6 +1,9 @@
 // ignore: file_names
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/controllers/user_controller.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -16,13 +19,14 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   Widget build(BuildContext context) {
+    UserController user_controller = Get.find();
     return Scaffold(
       backgroundColor: uiColor,
       body: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           buildTop(),
-          buildContent(),
+          buildContent(user_controller),
         ],
       ),
     );
@@ -55,20 +59,24 @@ class _ProfileTabState extends State<ProfileTab> {
         child: Image.asset("../../../../assets/user.png", height: 130),
       );
 
-  buildContent() => Column(
+  buildContent(UserController controller) => Column(
         // TEXTOS DEL NOMBRE DE USUARIO
         children: [
-          const Text('Test User',
+          Obx(() => Text(controller.name,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontFamily: "Montserrat",
-                  fontWeight: FontWeight.bold)),
-          const Text('@UserMan08',
+                  fontWeight: FontWeight.bold))),
+          Obx(() => Text(controller.username,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white, 
-                  fontFamily: "Montserrat")),
+              style: const TextStyle(color: Colors.white, fontFamily: "Montserrat"))),
+          const SizedBox(
+            height: 30,
+          ),
+          Obx(() => Text(controller.salute,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white, fontFamily: "Montserrat"))),
           const SizedBox(
             height: 30,
           ),
@@ -83,7 +91,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 ElevatedButton(
                   onPressed: () => Get.offNamed('/auth_page'),
                   style: ElevatedButton.styleFrom(
-                    fixedSize: const Size.fromHeight(40),
+                    //fixedSize: const Size.fromHeight(40),
                     backgroundColor: const Color.fromARGB(255, 2, 155, 69),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
