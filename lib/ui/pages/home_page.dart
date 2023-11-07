@@ -144,7 +144,6 @@ class _HomePageState extends State<HomePage> {
                     loc_controller.setLastAct(TimeOfDay.now());
                     print("map");
                   } else if (currentIndex == 1) {
-                    print("chat");
                     Get.toNamed('/add_page');
                   }
                 },

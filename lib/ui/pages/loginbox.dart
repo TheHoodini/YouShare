@@ -40,12 +40,11 @@ class _LoginBoxState extends State<LoginBox> {
                       fontWeight: FontWeight.bold,
                       fontFamily: "Montserrat")),
             ),
-            // USERNAME
+            // EMAIL
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: TextFormField(
                   style: const TextStyle(fontFamily: "Montserrat"),
-                  controller: _controller,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z@.]")),
                     LengthLimitingTextInputFormatter(50)
@@ -53,7 +52,7 @@ class _LoginBoxState extends State<LoginBox> {
                   decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.alternate_email,
+                      prefixIcon: Icon(Icons.mail,
                           color: Color.fromARGB(255, 97, 97, 97)),
                       labelText: 'Email',
                       labelStyle: TextStyle(
@@ -63,11 +62,10 @@ class _LoginBoxState extends State<LoginBox> {
             ),
             // PASSWORD
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: TextFormField(
                   obscureText: true,
-                  controller: _controller2,
-                  inputFormatters: [LengthLimitingTextInputFormatter(30)],
+                  inputFormatters: [LengthLimitingTextInputFormatter(29)],
                   decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -79,7 +77,7 @@ class _LoginBoxState extends State<LoginBox> {
                           fontFamily: "Montserrat"),
                       floatingLabelBehavior: FloatingLabelBehavior.never)),
             ),
-            // TEXTO DE LOGIN
+            // TEXTO DE CREAR CUENTA
             Padding(
                 padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
                 child: GestureDetector(
@@ -99,7 +97,7 @@ class _LoginBoxState extends State<LoginBox> {
                   const SizedBox(
                     width: 0.0,
                   ),
-                  // BOTÓN SIGN UP
+                  // BOTÓN LOG IN
                   ElevatedButton(
                     onPressed: () => {
                       if(user_controller.checkAccountValid()){
