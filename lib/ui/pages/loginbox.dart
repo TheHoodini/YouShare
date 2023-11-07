@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import '../controllers/user_controller.dart';
 
 class LoginBox extends StatefulWidget {
   final Function(int) changeMainPageIndex;
@@ -11,8 +12,11 @@ class LoginBox extends StatefulWidget {
 }
 
 class _LoginBoxState extends State<LoginBox> {
+  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    UserController user_controller = Get.find();
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -41,16 +45,17 @@ class _LoginBoxState extends State<LoginBox> {
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: TextFormField(
                   style: const TextStyle(fontFamily: "Montserrat"),
+                  controller: _controller,
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
-                    LengthLimitingTextInputFormatter(20)
+                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z@.]")),
+                    LengthLimitingTextInputFormatter(50)
                   ],
                   decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
                       prefixIcon: Icon(Icons.alternate_email,
                           color: Color.fromARGB(255, 97, 97, 97)),
-                      labelText: 'Username',
+                      labelText: 'Email',
                       labelStyle: TextStyle(
                           color: Color.fromARGB(255, 97, 97, 97),
                           fontFamily: "Montserrat"),
@@ -61,7 +66,8 @@ class _LoginBoxState extends State<LoginBox> {
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: TextFormField(
                   obscureText: true,
-                  inputFormatters: [LengthLimitingTextInputFormatter(29)],
+                  controller: _controller2,
+                  inputFormatters: [LengthLimitingTextInputFormatter(30)],
                   decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -95,7 +101,12 @@ class _LoginBoxState extends State<LoginBox> {
                   ),
                   // BOTÓN SIGN UP
                   ElevatedButton(
-                    onPressed: () => Get.offNamed('/home_page'),
+                    onPressed: () => {
+                      if(user_controller.checkAccountValid()){
+                        user_controller.setEmail(_controller.text),
+                        Get.offNamed('/home_page'),
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size.fromHeight(40),
                         backgroundColor: const Color.fromARGB(255, 2, 155, 69),

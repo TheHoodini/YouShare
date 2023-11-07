@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/controllers/user_controller.dart';
 
 class CreateBox extends StatefulWidget {
   final Function(int) changeMainPageIndex;
@@ -10,8 +11,13 @@ class CreateBox extends StatefulWidget {
 }
 
 class _CreateBoxState extends State<CreateBox> {
+  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+  final TextEditingController _controller3 = TextEditingController();
+  final TextEditingController _controller4 = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    UserController user_controller = Get.find();
     return SimpleDialog(
       backgroundColor: const Color.fromARGB(255, 0, 51, 124).withOpacity(0.7),
       // Aquí puede ir el logo en vez del Text()
@@ -36,6 +42,7 @@ class _CreateBoxState extends State<CreateBox> {
           padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
           child: TextFormField(
               style: const TextStyle(fontFamily: "Montserrat"),
+              controller: _controller,
               inputFormatters: [LengthLimitingTextInputFormatter(20)],
               decoration: const InputDecoration(
                   filled: true,
@@ -49,15 +56,12 @@ class _CreateBoxState extends State<CreateBox> {
                       fontFamily: "Montserrat"),
                   floatingLabelBehavior: FloatingLabelBehavior.never)),
         ),
-        // USERNAME
         Padding(
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: TextFormField(
               style: const TextStyle(fontFamily: "Montserrat"),
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
-                LengthLimitingTextInputFormatter(20)
-              ],
+              controller: _controller4,
+              inputFormatters: [LengthLimitingTextInputFormatter(20)],
               decoration: const InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -70,11 +74,34 @@ class _CreateBoxState extends State<CreateBox> {
                       fontFamily: "Montserrat"),
                   floatingLabelBehavior: FloatingLabelBehavior.never)),
         ),
+        // USERNAME
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: TextFormField(
+              style: const TextStyle(fontFamily: "Montserrat"),
+              controller: _controller2,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z@.]")),
+                LengthLimitingTextInputFormatter(50)
+              ],
+              decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  prefixIcon: Icon(Icons.alternate_email,
+                      color: Color.fromARGB(255, 97, 97, 97)),
+                  labelText: 'Email',
+                  labelStyle: TextStyle(
+                      color: Color.fromARGB(255, 97, 97, 97),
+                      fontStyle: FontStyle.normal,
+                      fontFamily: "Montserrat"),
+                  floatingLabelBehavior: FloatingLabelBehavior.never)),
+        ),
         // PASSWORD
         Padding(
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: TextFormField(
               obscureText: true,
+              controller: _controller3,
               inputFormatters: [LengthLimitingTextInputFormatter(30)],
               decoration: const InputDecoration(
                   filled: true,
@@ -113,8 +140,13 @@ class _CreateBoxState extends State<CreateBox> {
               // BOTÓN SIGN UP
               ElevatedButton(
                 onPressed: () {
-                  Get.offNamed('/home_page');
-                  widget.changeMainPageIndex(0);
+                  if (user_controller.createAccount()) {
+                    user_controller.setName(_controller.text);
+                    user_controller.setEmail(_controller2.text);
+                    user_controller.setUsername(_controller4.text);
+                    Get.offNamed('/home_page');
+                    widget.changeMainPageIndex(0);
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                     fixedSize: const Size.fromHeight(40),

@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/controllers/location_controller.dart';
 
 // Tabs
 import 'package:proychat/ui/pages/tabs/map_tab.dart';
@@ -24,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   IconData currentFloatingButtonIcon = Icons.location_on;
+  LocationController loc_controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -135,6 +139,9 @@ class _HomePageState extends State<HomePage> {
               child: FloatingActionButton(
                 onPressed: () {
                   if (currentIndex == 0) {
+                    loc_controller.setLat((Random().nextDouble()-0.5)*40);
+                    loc_controller.setLon((Random().nextDouble()-0.5)*40);
+                    loc_controller.setLastAct(TimeOfDay.now());
                     print("map");
                   } else if (currentIndex == 1) {
                     print("chat");

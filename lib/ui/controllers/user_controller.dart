@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
-  final _username = '@username'.obs;
+  final _username = 'username'.obs;
   final _name = 'Name'.obs;
   final _email = 'name@mail.com'.obs;
   final _salute = 'Hey! I\'m using YouShare'.obs;
@@ -15,4 +15,8 @@ class UserController extends GetxController {
   setName(newValue) => _name.value = newValue;
   setEmail(newValue) => _email.value = newValue;
   setSalute(newValue) => _salute.value = newValue;
+
+  //Methods
+  bool checkAccountValid() => true;
+  bool createAccount() => true;
 }

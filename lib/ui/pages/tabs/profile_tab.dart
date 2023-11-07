@@ -62,21 +62,27 @@ class _ProfileTabState extends State<ProfileTab> {
   buildContent(UserController controller) => Column(
         // TEXTOS DEL NOMBRE DE USUARIO
         children: [
-          Obx(() => Text(controller.name,
+          Obx(() => Text('@${controller.username}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                   color: Colors.white,
                   fontFamily: "Montserrat",
                   fontWeight: FontWeight.bold))),
-          Obx(() => Text(controller.username,
+          Obx(() => Text(controller.email,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white, fontFamily: "Montserrat"))),
+              style: const TextStyle(
+                  color: Colors.white, fontFamily: "Montserrat"))),
+          Obx(() => Text(controller.name,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: Colors.white, fontFamily: "Montserrat", fontWeight: FontWeight.bold))),
           const SizedBox(
             height: 30,
           ),
           Obx(() => Text(controller.salute,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white, fontFamily: "Montserrat"))),
+              style: const TextStyle(
+                  color: Colors.white, fontFamily: "Montserrat"))),
           const SizedBox(
             height: 30,
           ),
