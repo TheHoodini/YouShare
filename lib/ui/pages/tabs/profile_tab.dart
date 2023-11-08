@@ -52,14 +52,14 @@ class _ProfileTabState extends State<ProfileTab> {
 
   Widget buildCoverImage() => Container(
         color: Colors.grey,
-        child: Image.asset("../../../../assets/landscape.jpg",
+        child: Image.asset("assets/landscape.jpg",
             width: double.infinity, height: coverHeight, fit: BoxFit.cover),
       );
 
   Widget buildProfileImage() => CircleAvatar(
         radius: profileHeight / 2,
         backgroundColor: uiColor,
-        child: Image.asset("../../../../assets/user.png", height: 130),
+        child: Image.asset("assets/user.png", height: 130),
       );
 
   buildContent(UserController controller) => Column(
@@ -151,7 +151,7 @@ class _ProfileTabState extends State<ProfileTab> {
             ],
           ),
           const SizedBox(
-            height: 100,
+            height: 80,
           ),
           // ---------------------------
           Row(
