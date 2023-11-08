@@ -92,6 +92,8 @@ flutter:
             style: normal
           - asset: assets/Montserrat-Bold.ttf
             weight: 100
+          - asset: assets/Montserrat-Light.ttf
+            weight: 200
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

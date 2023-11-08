@@ -79,7 +79,7 @@ class _LoginBoxState extends State<LoginBox> {
             ),
             // TEXTO DE CREAR CUENTA
             Padding(
-                padding: const EdgeInsets.fromLTRB(14, 10, 0, 20),
+                padding: const EdgeInsets.fromLTRB(14, 10, 14, 20),
                 child: GestureDetector(
                     onTap: () {
                       // cambia el index a 1
@@ -90,6 +90,7 @@ class _LoginBoxState extends State<LoginBox> {
                             color: Colors.white,
                             decoration: TextDecoration.underline,
                             decorationColor: Colors.white,
+                            fontWeight: FontWeight.w200,
                             fontFamily: "Montserrat")))),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

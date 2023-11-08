@@ -2,6 +2,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:proychat/ui/controllers/user_controller.dart';
 
@@ -16,6 +17,8 @@ class _ProfileTabState extends State<ProfileTab> {
   final double coverHeight = 170;
   final double profileHeight = 144;
   final Color uiColor = const Color.fromARGB(255, 2, 11, 44);
+
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,29 +65,93 @@ class _ProfileTabState extends State<ProfileTab> {
   buildContent(UserController controller) => Column(
         // TEXTOS DEL NOMBRE DE USUARIO
         children: [
-          Obx(() => Text('@${controller.username}',
+          Obx(() => Text(controller.name,
               textAlign: TextAlign.center,
               style: const TextStyle(
                   color: Colors.white,
                   fontFamily: "Montserrat",
                   fontWeight: FontWeight.bold))),
+          Obx(() => Text('@${controller.username}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.w200))),
           Obx(() => Text(controller.email,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  color: Colors.white, fontFamily: "Montserrat"))),
-          Obx(() => Text(controller.name,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: Colors.white, fontFamily: "Montserrat", fontWeight: FontWeight.bold))),
+                  color: Colors.white,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.w200))),
           const SizedBox(
             height: 30,
           ),
-          Obx(() => Text(controller.salute,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: Colors.white, fontFamily: "Montserrat"))),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Obx(() {
+                if (controller.isEditing) {
+                  // Muestra un TextField cuando está en modo de edición
+                  return Padding(
+                      padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                      child: TextField(
+                        controller: _controller,
+                        onEditingComplete: () {
+                          // Cuando se completa la edición, actualiza el valor en el controlador
+                          controller.setSalute(_controller.text);
+                          controller.setIsEditing(false);
+                        },
+                        style: const TextStyle(fontFamily: "Montserrat"),
+                        inputFormatters: [LengthLimitingTextInputFormatter(100)],
+                        decoration: const InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 0, 51, 124),
+                                    width: 2.0)),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 2, 155, 69),
+                                    width: 2.0)),
+                            labelText: 'Salute',
+                            labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 97, 97, 97),
+                                fontStyle: FontStyle.normal,
+                                fontFamily: "Montserrat"),
+                            floatingLabelBehavior: FloatingLabelBehavior.auto),
+                      ));
+                } else {
+                  // Muestra un Text cuando no está en modo de edición
+                  return Padding(
+                      padding: const EdgeInsets.fromLTRB(80, 10, 80, 0),
+                      child: Text(
+                        controller.salute,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Montserrat",
+                        ),
+                      ));
+                }
+              }),
+              const SizedBox(height: 8),
+              GestureDetector(
+                onTap: () {
+                  if (!controller.isEditing) {
+                    print("a");
+                    // Habilita el modo de edición al hacer clic en el ícono
+                    controller.setIsEditing(true);
+                    // Inicializa el valor del TextField con el valor actual
+                    _controller.text = controller.salute;
+                  } else {
+                    controller.setIsEditing(false);
+                  }
+                },
+                child: Icon(Icons.border_color, color: Color.fromARGB(255, 2, 155, 69)),
+              ),
+            ],
+          ),
           const SizedBox(
-            height: 30,
+            height: 100,
           ),
           // ---------------------------
           Row(
