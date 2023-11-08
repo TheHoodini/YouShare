@@ -69,7 +69,7 @@ class _CreateBoxState extends State<CreateBox> {
               child: TextFormField(
                   style: const TextStyle(fontFamily: "Montserrat"),
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
+                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z@_]"))
                   ],
                   controller: _controller2,
                   decoration: const InputDecoration(
