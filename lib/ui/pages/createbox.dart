@@ -137,7 +137,7 @@ class _CreateBoxState extends State<CreateBox> {
                             color: Colors.white,
                             decoration: TextDecoration.underline,
                             decorationColor: Colors.white,
-                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w200,
                             fontFamily: "Montserrat")))),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
