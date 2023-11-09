@@ -41,119 +41,122 @@ class _HomePageState extends State<HomePage> {
       currentFloatingButtonIcon = Icons.location_on;
     } else if (currentIndex == 1) {
       currentFloatingButtonIcon = Icons.person_add;
+    } else if (currentIndex == 2) {
+      currentFloatingButtonIcon = Icons.logout;
     }
 
     return Scaffold(
-      extendBody: true,
-      appBar: AppBar(
-        backgroundColor: uiColor,
-        centerTitle: true,
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(0.1), // Altura de la línea
-          child: Divider(
-            color: Color.fromARGB(80, 255, 255, 255), // Color de la línea
-            height: 0.0, // Grosor de la línea
-          ),
-        ),
-        title: const Text(
-          'YouShare',
-          style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
-        ),
-      ),
-      // Utiliza PageView en lugar de un solo widget para cambiar las páginas
-      body: PageView(
-        controller: _pageController,
-        physics:
-            const NeverScrollableScrollPhysics(), // No deslizamiento manual
-        children: screens,
-      ),
-      bottomNavigationBar: Container(
-        margin: EdgeInsets.all(displayWidth * .05),
-        height: 70,
-        decoration: BoxDecoration(
-          //color: Colors.white,
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromARGB(120, 0, 0, 0),
-              spreadRadius: 0,
-              blurRadius: 10,
-            ),
-          ],
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
-            bottomLeft: Radius.circular(30.0),
-            bottomRight: Radius.circular(30.0),
-          ),
-          child: NavigationBarTheme(
-            data: NavigationBarThemeData(
-              indicatorColor: const Color.fromARGB(0, 13, 42, 158),
-              labelTextStyle: MaterialStatePropertyAll(TextStyle(
-                color: selIconColor,
-                fontWeight: FontWeight.bold,
-                fontFamily: "Montserrat",
-              )),
-              labelBehavior:
-                  NavigationDestinationLabelBehavior.onlyShowSelected,
-            ),
-            child: NavigationBar(
-              backgroundColor: uiColor,
-              selectedIndex: currentIndex,
-              onDestinationSelected: (index) {
-                setState(() {
-                  currentIndex = index;
-                  _pageController.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.ease,
-                  );
-                });
-              },
-              destinations: [
-                NavigationDestination(
-                  icon: Icon(Icons.map_outlined, color: iconColor),
-                  selectedIcon: Icon(Icons.map, color: selIconColor),
-                  label: "Map",
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.forum_outlined, color: iconColor),
-                  selectedIcon: Icon(Icons.forum, color: selIconColor),
-                  label: "Chat",
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.account_circle_outlined, color: iconColor),
-                  selectedIcon: Icon(Icons.account_circle, color: selIconColor),
-                  label: "Profile",
-                ),
-              ],
+        extendBody: true,
+        appBar: AppBar(
+          backgroundColor: uiColor,
+          centerTitle: true,
+          bottom: const PreferredSize(
+            preferredSize: Size.fromHeight(0.1), // Altura de la línea
+            child: Divider(
+              color: Color.fromARGB(80, 255, 255, 255), // Color de la línea
+              height: 0.0, // Grosor de la línea
             ),
           ),
+          title: const Text(
+            'YouShare',
+            style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
+          ),
         ),
-      ),
-      floatingActionButton: currentIndex != 2
-          ? Padding(
-              padding: const EdgeInsets.only(top: 10, right: 20),
-              child: FloatingActionButton(
-                onPressed: () {
-                  if (currentIndex == 0) {
-                    loc_controller.setLat((Random().nextDouble()-0.5)*40);
-                    loc_controller.setLon((Random().nextDouble()-0.5)*40);
-                    loc_controller.setLastAct(TimeOfDay.now());
-                    print("map");
-                  } else if (currentIndex == 1) {
-                    Get.toNamed('/add_page');
-                  }
-                },
-                backgroundColor: const Color.fromARGB(255, 2, 155, 69),
-                child: Icon(currentFloatingButtonIcon),
+        // Utiliza PageView en lugar de un solo widget para cambiar las páginas
+        body: PageView(
+          controller: _pageController,
+          physics:
+              const NeverScrollableScrollPhysics(), // No deslizamiento manual
+          children: screens,
+        ),
+        bottomNavigationBar: Container(
+          margin: EdgeInsets.all(displayWidth * .05),
+          height: 70,
+          decoration: BoxDecoration(
+            //color: Colors.white,
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(120, 0, 0, 0),
+                spreadRadius: 0,
+                blurRadius: 10,
               ),
-            )
-          : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-    );
+            ],
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+              bottomLeft: Radius.circular(30.0),
+              bottomRight: Radius.circular(30.0),
+            ),
+            child: NavigationBarTheme(
+              data: NavigationBarThemeData(
+                indicatorColor: const Color.fromARGB(0, 13, 42, 158),
+                labelTextStyle: MaterialStatePropertyAll(TextStyle(
+                  color: selIconColor,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Montserrat",
+                )),
+                labelBehavior:
+                    NavigationDestinationLabelBehavior.onlyShowSelected,
+              ),
+              child: NavigationBar(
+                backgroundColor: uiColor,
+                selectedIndex: currentIndex,
+                onDestinationSelected: (index) {
+                  setState(() {
+                    currentIndex = index;
+                    _pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.ease,
+                    );
+                  });
+                },
+                destinations: [
+                  NavigationDestination(
+                    icon: Icon(Icons.map_outlined, color: iconColor),
+                    selectedIcon: Icon(Icons.map, color: selIconColor),
+                    label: "Map",
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.forum_outlined, color: iconColor),
+                    selectedIcon: Icon(Icons.forum, color: selIconColor),
+                    label: "Chat",
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.account_circle_outlined, color: iconColor),
+                    selectedIcon:
+                        Icon(Icons.account_circle, color: selIconColor),
+                    label: "Profile",
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(top: 10, right: 20),
+          child: FloatingActionButton(
+            onPressed: () {
+              // ACCIONES MAP
+              if (currentIndex == 0) {
+                loc_controller.setLat((Random().nextDouble() - 0.5) * 40);
+                loc_controller.setLon((Random().nextDouble() - 0.5) * 40);
+                loc_controller.setLastAct(TimeOfDay.now());
+                print("map");
+                // ACCIONES CHAT
+              } else if (currentIndex == 1) {
+                Get.toNamed('/add_page');
+                // ACCIONES PROFILE
+              } else if (currentIndex == 2) {
+                Get.offNamed('/auth_page');
+              }
+            },
+            backgroundColor: const Color.fromARGB(255, 2, 155, 69),
+            child: Icon(currentFloatingButtonIcon),
+          ),
+        ));
   }
 }

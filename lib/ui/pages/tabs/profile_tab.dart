@@ -14,11 +14,13 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
-  final double coverHeight = 170;
+  final double coverHeight = 150;
   final double profileHeight = 144;
   final Color uiColor = const Color.fromARGB(255, 2, 11, 44);
 
   final TextEditingController _controller = TextEditingController();
+
+  IconData editIcon = Icons.border_color;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,43 @@ class _ProfileTabState extends State<ProfileTab> {
         children: <Widget>[
           buildTop(),
           buildContent(user_controller),
+          //buildLogOutButton()
         ],
       ),
     );
+  }
+
+  Widget buildLogOutButton() {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+      // BOTÓN LOG OUT
+      ElevatedButton(
+        onPressed: () => Get.offNamed('/auth_page'),
+        style: ElevatedButton.styleFrom(
+          //fixedSize: const Size.fromHeight(40),
+          backgroundColor: const Color.fromARGB(255, 2, 155, 69),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: const Row(
+          children: [
+            Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+            SizedBox(width: 8),
+            Text(
+              "Log Out",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Montserrat",
+              ),
+            ),
+          ],
+        ),
+      ),
+    ]);
   }
 
   Widget buildTop() {
@@ -93,32 +129,37 @@ class _ProfileTabState extends State<ProfileTab> {
                 if (controller.isEditing) {
                   // Muestra un TextField cuando está en modo de edición
                   return Padding(
-                      padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
-                      child: TextField(
-                        controller: _controller,
-                        onEditingComplete: () {
-                          // Cuando se completa la edición, actualiza el valor en el controlador
-                          controller.setSalute(_controller.text);
-                          controller.setIsEditing(false);
-                        },
-                        style: const TextStyle(fontFamily: "Montserrat"),
-                        inputFormatters: [LengthLimitingTextInputFormatter(100)],
-                        decoration: const InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 0, 51, 124),
-                                    width: 2.0)),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 2, 155, 69),
-                                    width: 2.0)),
-                            labelText: 'Salute',
-                            labelStyle: TextStyle(
-                                color: Color.fromARGB(255, 97, 97, 97),
-                                fontStyle: FontStyle.normal,
-                                fontFamily: "Montserrat"),
-                            floatingLabelBehavior: FloatingLabelBehavior.auto),
-                      ));
+                    padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                    child: TextField(
+                      controller: _controller,
+                      onEditingComplete: () {
+                        // Cuando se completa la edición, actualiza el valor en el controlador
+                        setState(() {
+                          editIcon = Icons.border_color;
+                        });
+                        controller.setSalute(_controller.text);
+                        controller.setIsEditing(false);
+                      },
+                      style: const TextStyle(fontFamily: "Montserrat"),
+                      inputFormatters: [LengthLimitingTextInputFormatter(100)],
+                      decoration: const InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 51, 124),
+                                  width: 2.0)),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 2, 155, 69),
+                                  width: 2.0)),
+                          labelText: 'Salute',
+                          labelStyle: TextStyle(
+                              color: Color.fromARGB(255, 97, 97, 97),
+                              fontStyle: FontStyle.normal,
+                              fontFamily: "Montserrat"),
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          focusColor: Color.fromARGB(255, 2, 155, 69)),
+                    ), //tf
+                  );
                 } else {
                   // Muestra un Text cuando no está en modo de edición
                   return Padding(
@@ -137,16 +178,21 @@ class _ProfileTabState extends State<ProfileTab> {
               GestureDetector(
                 onTap: () {
                   if (!controller.isEditing) {
-                    print("a");
+                    setState(() {
+                      editIcon = Icons.edit_off;
+                    });
                     // Habilita el modo de edición al hacer clic en el ícono
                     controller.setIsEditing(true);
                     // Inicializa el valor del TextField con el valor actual
                     _controller.text = controller.salute;
                   } else {
                     controller.setIsEditing(false);
+                    setState(() {
+                      editIcon = Icons.border_color;
+                    });
                   }
                 },
-                child: Icon(Icons.border_color, color: Color.fromARGB(255, 2, 155, 69)),
+                child: Icon(editIcon, color: Color.fromARGB(255, 2, 155, 69)),
               ),
             ],
           ),
@@ -154,45 +200,6 @@ class _ProfileTabState extends State<ProfileTab> {
             height: 80,
           ),
           // ---------------------------
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                const SizedBox(
-                  width: 0.0,
-                ),
-                // BOTÓN LOG OUT
-                ElevatedButton(
-                  onPressed: () => Get.offNamed('/auth_page'),
-                  style: ElevatedButton.styleFrom(
-                    //fixedSize: const Size.fromHeight(40),
-                    backgroundColor: const Color.fromARGB(255, 2, 155, 69),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.logout,
-                        color: Colors.white,
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        "Log Out",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Montserrat",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                //
-                const SizedBox(
-                  width: 0.0,
-                ),
-              ]),
           const SizedBox(
             height: 10,
           ),
