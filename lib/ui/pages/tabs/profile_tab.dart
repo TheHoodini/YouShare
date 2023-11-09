@@ -129,7 +129,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 if (controller.isEditing) {
                   // Muestra un TextField cuando está en modo de edición
                   return Padding(
-                    padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                    padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                     child: TextField(
                       controller: _controller,
                       onEditingComplete: () {
@@ -140,24 +140,23 @@ class _ProfileTabState extends State<ProfileTab> {
                         controller.setSalute(_controller.text);
                         controller.setIsEditing(false);
                       },
-                      style: const TextStyle(fontFamily: "Montserrat"),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Montserrat",
+                          fontSize: 14),
                       inputFormatters: [LengthLimitingTextInputFormatter(100)],
                       decoration: const InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 0, 51, 124),
-                                  width: 2.0)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 2, 155, 69),
-                                  width: 2.0)),
-                          labelText: 'Salute',
-                          labelStyle: TextStyle(
-                              color: Color.fromARGB(255, 97, 97, 97),
-                              fontStyle: FontStyle.normal,
-                              fontFamily: "Montserrat"),
-                          floatingLabelBehavior: FloatingLabelBehavior.auto,
-                          focusColor: Color.fromARGB(255, 2, 155, 69)),
+                        filled: false,
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 51, 124),
+                                width: 2.0)),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 2, 155, 69),
+                              width: 2.0),
+                        ),
+                      ),
                     ), //tf
                   );
                 } else {
@@ -192,7 +191,7 @@ class _ProfileTabState extends State<ProfileTab> {
                     });
                   }
                 },
-                child: Icon(editIcon, color: Color.fromARGB(255, 2, 155, 69)),
+                child: Icon(editIcon, color: const Color.fromARGB(255, 2, 155, 69)),
               ),
             ],
           ),

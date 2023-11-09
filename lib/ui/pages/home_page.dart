@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         extendBody: true,
         appBar: AppBar(
           backgroundColor: uiColor,
