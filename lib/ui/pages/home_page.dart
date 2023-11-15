@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proychat/ui/controllers/location_controller.dart';
@@ -19,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController(initialPage: 0);
   int currentIndex = 0;
+  bool sharingLocation = false;
 
   final screens = const [
     MapTab(),
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   IconData currentFloatingButtonIcon = Icons.location_on;
-  LocationController loc_controller = Get.find();
+  LocationController locController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,11 @@ class _HomePageState extends State<HomePage> {
 
     // Actualizar el ícono del Floating Button
     if (currentIndex == 0) {
-      currentFloatingButtonIcon = Icons.location_on;
+      if (!sharingLocation) {
+        currentFloatingButtonIcon = Icons.location_on;
+      } else {
+        currentFloatingButtonIcon = Icons.location_off;
+      }
     } else if (currentIndex == 1) {
       currentFloatingButtonIcon = Icons.person_add;
     } else if (currentIndex == 2) {
@@ -143,10 +149,24 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               // ACCIONES MAP
               if (currentIndex == 0) {
-                loc_controller.setLat((Random().nextDouble() - 0.5) * 40);
-                loc_controller.setLon((Random().nextDouble() - 0.5) * 40);
-                loc_controller.setLastAct(TimeOfDay.now());
-                print("map");
+                locController.setLat((Random().nextDouble() - 0.5) * 40);
+                locController.setLon((Random().nextDouble() - 0.5) * 40);
+                locController.setLastAct(TimeOfDay.now());
+                if (!sharingLocation) {
+                  showSnackbar(
+                      context, "   Now sharing location", Icons.where_to_vote);
+                  setState(() {
+                    sharingLocation = true;
+                    currentFloatingButtonIcon = Icons.location_off;
+                  });
+                } else {
+                  showSnackbar(
+                      context, "   Location share ended", Icons.wrong_location);
+                  setState(() {
+                    sharingLocation = false;
+                    currentFloatingButtonIcon = Icons.location_on;
+                  });
+                }
                 // ACCIONES CHAT
               } else if (currentIndex == 1) {
                 Get.toNamed('/add_page');
@@ -160,4 +180,21 @@ class _HomePageState extends State<HomePage> {
           ),
         ));
   }
+
+  void showSnackbar(BuildContext context, String texto, IconData icono) =>
+      Flushbar(
+        icon: Icon(icono, size: 32, color: Colors.white),
+        shouldIconPulse: false,
+        messageText: Text(texto,
+            style: const TextStyle(
+                fontFamily: "Montserrat",
+                color: Colors.white,
+                fontWeight: FontWeight.w300)),
+        duration: const Duration(seconds: 2),
+        flushbarPosition: FlushbarPosition.TOP,
+        margin: const EdgeInsets.fromLTRB(130, 2, 130, 0),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        barBlur: 20,
+        backgroundColor: Colors.black.withOpacity(0.5),
+      )..show(context);
 }

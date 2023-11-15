@@ -12,13 +12,13 @@ class MapTab extends StatefulWidget {
 
 // hola
 class _MapTabState extends State<MapTab> {
-  LocationController loc_controller = Get.find();
+  LocationController locController = Get.find();
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: const Color.fromARGB(255, 117, 161, 150),
         body: Center(
           child: Obx(() => Text(
-            "Location: ${loc_controller.latitud}, ${loc_controller.longitud}\nOn: ${loc_controller.lastActualization}",
+            "Location: ${locController.latitud}, ${locController.longitud}\nOn: ${locController.lastActualization}",
             style: const TextStyle(color: Colors.black),
           )),
         ),
