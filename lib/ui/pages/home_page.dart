@@ -149,10 +149,10 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               // ACCIONES MAP
               if (currentIndex == 0) {
-                locController.setLat((Random().nextDouble() - 0.5) * 40);
-                locController.setLon((Random().nextDouble() - 0.5) * 40);
-                locController.setLastAct(TimeOfDay.now());
                 if (!sharingLocation) {
+                  locController.setLat((Random().nextDouble() - 0.5) * 180);
+                  locController.setLon((Random().nextDouble() - 0.5) * 360);
+                  locController.setLastAct(TimeOfDay.now());
                   showSnackbar(
                       context, "   Now sharing location", Icons.where_to_vote);
                   setState(() {
