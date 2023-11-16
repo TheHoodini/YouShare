@@ -24,8 +24,9 @@ class _MapTabState extends State<MapTab> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      backgroundColor: const Color.fromARGB(255, 117, 161, 150),
-      body: Obx(() => GoogleMap(
+        //backgroundColor: const Color.fromARGB(255, 117, 161, 150),
+        body: Obx(
+          () => GoogleMap(
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: LatLng(locController.latitud, locController.longitud),
@@ -34,13 +35,16 @@ class _MapTabState extends State<MapTab> {
             zoomControlsEnabled: false,
             markers: {
               Marker(
-                markerId: const MarkerId("Yo"),
-                position: LatLng(locController.latitud, locController.longitud),
-                infoWindow: InfoWindow(
-                  title: "Yo",
-                  snippet: controller.name,
-                ),
-              ), // Marker
+                  markerId: const MarkerId("Me"),
+                  position:
+                      LatLng(locController.latitud, locController.longitud),
+                  infoWindow: InfoWindow(
+                    title: "Me",
+                    snippet: controller.name,
+                  ),
+                  visible: locController.markerVisibility), // Marker
             },
-          )));
+          ),
+        ),
+      );
 }
