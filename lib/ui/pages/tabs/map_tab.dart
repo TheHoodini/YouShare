@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proychat/ui/controllers/location_controller.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:proychat/ui/controllers/user_controller.dart';
 
 class MapTab extends StatefulWidget {
   const MapTab({super.key});
@@ -13,14 +15,32 @@ class MapTab extends StatefulWidget {
 // hola
 class _MapTabState extends State<MapTab> {
   LocationController locController = Get.find();
+  UserController controller = Get.find();
+
+  late GoogleMapController mapController;
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: const Color.fromARGB(255, 117, 161, 150),
-        body: Center(
-          child: Obx(() => Text(
-            "Location: ${locController.latitud}, ${locController.longitud}\nOn: ${locController.lastActualization}",
-            style: const TextStyle(color: Colors.black),
-          )),
-        ),
-      );
+      backgroundColor: const Color.fromARGB(255, 117, 161, 150),
+      body: Obx(() => GoogleMap(
+            onMapCreated: _onMapCreated,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(locController.latitud, locController.longitud),
+              zoom: 5.0,
+            ),
+            zoomControlsEnabled: false,
+            markers: {
+              Marker(
+                markerId: const MarkerId("Yo"),
+                position: LatLng(locController.latitud, locController.longitud),
+                infoWindow: InfoWindow(
+                  title: "Yo",
+                  snippet: controller.name,
+                ),
+              ), // Marker
+            },
+          )));
 }
