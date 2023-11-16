@@ -154,14 +154,14 @@ class _HomePageState extends State<HomePage> {
                 locController.setLastAct(TimeOfDay.now());
                 if (!sharingLocation) {
                   showSnackbar(
-                      context, "   Now sharing location", Icons.where_to_vote);
+                      context, "   Now sharing location", Icons.where_to_vote_rounded);
                   setState(() {
                     sharingLocation = true;
                     currentFloatingButtonIcon = Icons.location_off;
                   });
                 } else {
                   showSnackbar(
-                      context, "   Location share ended", Icons.wrong_location);
+                      context, "   Location share ended", Icons.wrong_location_rounded);
                   setState(() {
                     sharingLocation = false;
                     currentFloatingButtonIcon = Icons.location_on;
