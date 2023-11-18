@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:proychat/data/model/user_location.dart';
+import 'package:proychat/domain/use_cases/locator_service.dart';
 
 class LocationController extends GetxController {
-  final _latitud = 11.458621.obs;
-  final _longitud = (-7.4111983).obs;
-  final _lastActualization = const TimeOfDay(hour: 12, minute: 22).obs;
+  LocatorService service = Get.find();
 
-  double get latitud => _latitud.value;
-  double get longitud => _longitud.value;
+  //variables y funciones del controlador
+  var userLocation = UserLocation(latitude: 0, longitude: 0).obs;
+  final _lastActualization = const TimeOfDay(hour: 12, minute: 22).obs;
+  final _markerVisibility = false.obs;
+
+  bool get markerVisibility => _markerVisibility.value;
   TimeOfDay get lastActualization => _lastActualization.value;
 
-  setLat(newValue) => _latitud.value = newValue;
-  setLon(newValue) => _longitud.value = newValue;
   setLastAct(newValue) => _lastActualization.value = newValue;
+  makerVisibility(newValue) => _markerVisibility.value = newValue;
+
+  //variables y funciones externas
+  Future<void> getLocation() async {
+    userLocation.value =
+        await service.getLocation().onError((error, stackTrace) {
+      return Future.error(error.toString());
+    });
+  }
+
+  Future<void> subscribeLocationUpdate() async {}
+
+  Future<void> unsubscribeLocationUpdate() async {}
 }

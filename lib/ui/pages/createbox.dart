@@ -19,12 +19,12 @@ class _CreateBoxState extends State<CreateBox> {
   Widget build(BuildContext context) {
     UserController user_controller = Get.find();
     return SingleChildScrollView(
-        child: ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxWidth: 450, // Ancho máximo del SimpleDialog
-        //maxHeight: MediaQuery.of(context).size.height * 0.7, // Altura máxima
-      ),
-      child: SimpleDialog(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: 450, // Ancho máximo del SimpleDialog
+          //maxHeight: MediaQuery.of(context).size.height * 0.7, // Altura máxima
+        ),
+        child: SimpleDialog(
           backgroundColor:
               const Color.fromARGB(255, 0, 51, 124).withOpacity(0.7),
           // Aquí puede ir el logo en vez del Text()
@@ -69,7 +69,7 @@ class _CreateBoxState extends State<CreateBox> {
               child: TextFormField(
                   style: const TextStyle(fontFamily: "Montserrat"),
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z@_]"))
+                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z_]"))
                   ],
                   controller: _controller2,
                   decoration: const InputDecoration(
@@ -132,7 +132,7 @@ class _CreateBoxState extends State<CreateBox> {
                       widget.changeMainPageIndex(0);
                     },
                     child: const Text(
-                        'Already have an account? click here to Log in!',
+                        'Already have an account? Click here to Log in!',
                         style: TextStyle(
                             color: Colors.white,
                             decoration: TextDecoration.underline,
@@ -140,42 +140,45 @@ class _CreateBoxState extends State<CreateBox> {
                             fontWeight: FontWeight.w200,
                             fontFamily: "Montserrat")))),
             Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  const SizedBox(
-                    width: 0.0,
-                  ),
-                  // BOTÓN SIGN UP
-                  ElevatedButton(
-                    onPressed: () {
-                      if (user_controller.createAccount()) {
-                        user_controller.setEmail(_controller3.text);
-                        user_controller.setUsername(_controller2.text);
-                        user_controller.setName(_controller.text);
-                        Get.offNamed('/home_page');
-                        widget.changeMainPageIndex(0);
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: const Size.fromHeight(40),
-                        backgroundColor: const Color.fromARGB(255, 2, 155, 69),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16))),
-                    child: const Text("Create!",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.normal,
-                            fontFamily: "Montserrat")),
-                  ),
-                  const SizedBox(
-                    width: 0.0,
-                  ),
-                ]),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                const SizedBox(
+                  width: 0.0,
+                ),
+                // BOTÓN SIGN UP
+                ElevatedButton(
+                  onPressed: () {
+                    if (user_controller.createAccount()) {
+                      user_controller.setEmail(_controller3.text);
+                      user_controller.setUsername(_controller2.text);
+                      user_controller.setName(_controller.text);
+                      Get.offNamed('/home_page');
+                      widget.changeMainPageIndex(0);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: const Size.fromHeight(40),
+                      backgroundColor: const Color.fromARGB(255, 2, 155, 69),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16))),
+                  child: const Text("Create!",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.normal,
+                          fontFamily: "Montserrat")),
+                ),
+                const SizedBox(
+                  width: 0.0,
+                ),
+              ],
+            ),
             const SizedBox(
               height: 5.0,
             ),
-          ]),
-    ));
+          ],
+        ),
+      ),
+    );
   }
 }

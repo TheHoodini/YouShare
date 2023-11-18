@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proychat/ui/controllers/location_controller.dart';
@@ -19,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController(initialPage: 0);
   int currentIndex = 0;
+  bool sharingLocation = false;
 
   final screens = const [
     MapTab(),
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   IconData currentFloatingButtonIcon = Icons.location_on;
-  LocationController loc_controller = Get.find();
+  LocationController locController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +39,23 @@ class _HomePageState extends State<HomePage> {
     Color selIconColor = Colors.white;
 
     // Actualizar el ícono del Floating Button
+    // MAP
     if (currentIndex == 0) {
-      currentFloatingButtonIcon = Icons.location_on;
+      if (!sharingLocation) {
+        currentFloatingButtonIcon = Icons.location_on;
+      } else {
+        currentFloatingButtonIcon = Icons.location_off;
+      }
+      // CHAT
     } else if (currentIndex == 1) {
       currentFloatingButtonIcon = Icons.person_add;
+      // PROFILE
+    } else if (currentIndex == 2) {
+      currentFloatingButtonIcon = Icons.logout;
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBody: true,
       appBar: AppBar(
         backgroundColor: uiColor,
@@ -133,27 +145,67 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      floatingActionButton: currentIndex != 2
-          ? Padding(
-              padding: const EdgeInsets.only(top: 10, right: 20),
-              child: FloatingActionButton(
-                onPressed: () {
-                  if (currentIndex == 0) {
-                    loc_controller.setLat((Random().nextDouble()-0.5)*40);
-                    loc_controller.setLon((Random().nextDouble()-0.5)*40);
-                    loc_controller.setLastAct(TimeOfDay.now());
-                    print("map");
-                  } else if (currentIndex == 1) {
-                    Get.toNamed('/add_page');
-                  }
-                },
-                backgroundColor: const Color.fromARGB(255, 2, 155, 69),
-                child: Icon(currentFloatingButtonIcon),
-              ),
-            )
-          : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top: 10, right: 20),
+        child: FloatingActionButton(
+          onPressed: () async {
+            // ACCIONES MAP
+            if (currentIndex == 0) {
+              if (!sharingLocation) {
+                // locController.setLat((Random().nextDouble() - 0.5) * 180);
+                // locController.setLon((Random().nextDouble() - 0.5) * 360);
+                try {
+                  await locController.getLocation();
+                } catch (e) {
+                  Get.snackbar("Error", e.toString(),
+                      backgroundColor: Colors.red, colorText: Colors.white);
+                }
+                locController.setLastAct(TimeOfDay.now());
+                showSnackbar(context, "   Now sharing location",
+                    Icons.where_to_vote_rounded);
+                setState(() {
+                  sharingLocation = true;
+                  currentFloatingButtonIcon = Icons.location_off;
+                  locController.makerVisibility(sharingLocation);
+                });
+              } else {
+                showSnackbar(context, "   Location share ended",
+                    Icons.wrong_location_rounded);
+                setState(() {
+                  sharingLocation = false;
+                  currentFloatingButtonIcon = Icons.location_on;
+                  locController.makerVisibility(sharingLocation);
+                });
+              }
+              // ACCIONES CHAT
+            } else if (currentIndex == 1) {
+              Get.toNamed('/add_page');
+              // ACCIONES PROFILE
+            } else if (currentIndex == 2) {
+              Get.offNamed('/auth_page');
+            }
+          },
+          backgroundColor: const Color.fromARGB(255, 2, 155, 69),
+          child: Icon(currentFloatingButtonIcon),
+        ),
+      ),
     );
   }
+
+  void showSnackbar(BuildContext context, String texto, IconData icono) =>
+      Flushbar(
+        icon: Icon(icono, size: 32, color: Colors.white),
+        shouldIconPulse: false,
+        messageText: Text(texto,
+            style: const TextStyle(
+                fontFamily: "Montserrat",
+                color: Colors.white,
+                fontWeight: FontWeight.w300)),
+        duration: const Duration(seconds: 2),
+        flushbarPosition: FlushbarPosition.TOP,
+        margin: const EdgeInsets.fromLTRB(130, 2, 130, 0),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        barBlur: 20,
+        backgroundColor: const Color.fromARGB(180, 2, 155, 69),
+      )..show(context);
 }

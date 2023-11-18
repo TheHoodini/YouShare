@@ -58,7 +58,7 @@ class _AddPageState extends State<AddPage> {
                   child: TextFormField(
                       style: const TextStyle(fontFamily: "Montserrat"),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]"))
+                        FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z_]"))
                       ],
                       decoration: const InputDecoration(
                           filled: true,

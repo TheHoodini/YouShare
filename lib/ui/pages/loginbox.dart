@@ -85,7 +85,7 @@ class _LoginBoxState extends State<LoginBox> {
                       // cambia el index a 1
                       widget.changeMainPageIndex(1);
                     },
-                    child: const Text('No account? click here to create one!',
+                    child: const Text('No account? Click here to create one!',
                         style: TextStyle(
                             color: Colors.white,
                             decoration: TextDecoration.underline,
