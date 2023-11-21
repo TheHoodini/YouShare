@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:proychat/ui/controllers/authentication_controller.dart';
-import '../controllers/user_controller.dart';
 
 class LoginBox extends StatefulWidget {
   final Function(int) changeMainPageIndex;
@@ -17,7 +16,6 @@ class _LoginBoxState extends State<LoginBox> {
   final TextEditingController _controller2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    UserController user_controller = Get.find();
     AuthenticationController aut_controller = Get.find();
     return SingleChildScrollView(
       child: ConstrainedBox(

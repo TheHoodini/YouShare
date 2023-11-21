@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proychat/ui/controllers/authentication_controller.dart';
 import 'package:proychat/ui/controllers/location_controller.dart';
-import 'package:proychat/ui/controllers/user_controller.dart';
 
 // Tabs
 import 'package:proychat/ui/pages/tabs/map_tab.dart';
