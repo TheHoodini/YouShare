@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:proychat/ui/controllers/authentication_controller.dart';
+import 'package:proychat/ui/controllers/user_controller.dart';
 
 class LoginBox extends StatefulWidget {
   final Function(int) changeMainPageIndex;
@@ -16,6 +17,7 @@ class _LoginBoxState extends State<LoginBox> {
   final TextEditingController _controller2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    UserController controller = Get.find();
     AuthenticationController aut_controller = Get.find();
     return SingleChildScrollView(
       child: ConstrainedBox(
@@ -103,8 +105,8 @@ class _LoginBoxState extends State<LoginBox> {
                   // BOTÓN LOG IN
                   ElevatedButton(
                     onPressed: () => {
-                      aut_controller.login(
-                          _controller.text, _controller2.text),
+                      aut_controller.login(_controller.text, _controller2.text),
+                      controller.setEmail(_controller.text)
                     },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size.fromHeight(40),

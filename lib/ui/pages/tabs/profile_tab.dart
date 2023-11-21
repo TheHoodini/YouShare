@@ -25,6 +25,7 @@ class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     UserController user_controller = Get.find();
+    user_controller.setUserData(user_controller.email);
     return Scaffold(
       backgroundColor: uiColor,
       body: ListView(
@@ -191,7 +192,8 @@ class _ProfileTabState extends State<ProfileTab> {
                     });
                   }
                 },
-                child: Icon(editIcon, color: const Color.fromARGB(255, 2, 155, 69)),
+                child: Icon(editIcon,
+                    color: const Color.fromARGB(255, 2, 155, 69)),
               ),
             ],
           ),

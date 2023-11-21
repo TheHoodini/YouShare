@@ -21,7 +21,7 @@ class AuthenticationController extends GetxController {
   }
 
   // método usado para crear un usuario
-  Future<void> signup(email, password) async {
+  Future<void> signup(name, username, email, password) async {
     try {
       // primero creamos el usuario en el sistema de autenticación de firebase
       UserCredential userCredential = await FirebaseAuth.instance
@@ -31,7 +31,7 @@ class AuthenticationController extends GetxController {
 
       // después creamos el usuario en la base de datos de tiempo real usando el
       // userController
-      await userController.createUser(email, userCredential.user!.uid);
+      await userController.createUser(name, username, email, userCredential.user!.uid);
       return Future.value();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

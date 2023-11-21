@@ -21,19 +21,11 @@ class _ChatTabState extends State<ChatTab> {
 
   AuthenticationController authenticationController = Get.find();
   ChatController chatController = Get.find();
-  UserController userController = Get.find();
-
-  @override
-  void initState() {
-    // le decimos al userController que se suscriba a los streams
-    userController.start();
-    super.initState();
-  }
 
   @override
   void dispose() {
     // le decimos al userController que se cierre los streams
-    userController.stop();
+    controller.stop();
     super.dispose();
   }
 
@@ -45,16 +37,16 @@ class _ChatTabState extends State<ChatTab> {
     }
   }
 
-  Widget _item(String element) {
+  Widget _item(String element, uid, name) {
     // Widget usado en la lista de los usuarios
     // mostramos el correo y uid
     return Card(
       margin: const EdgeInsets.all(4.0),
       child: ListTile(
         onTap: () {
-          Get.to(() => const ChatPage(), arguments: [element]);
+          Get.to(() => const ChatPage(), arguments: [uid, element]);
         },
-        title: Text(element),
+        title: Text(name),
         subtitle: Text(element),
       ),
     );
@@ -65,19 +57,19 @@ class _ChatTabState extends State<ChatTab> {
     // la lista de usuarios la obtenemos del userController
     if (controller.users.isEmpty) {
       return const Center(
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text('Press ',
-              style: TextStyle(color: Colors.white, fontFamily: "Montserrat")),
-          Icon(Icons.person_add, color: Colors.white),
-          Text(' to add someone here!',
-              style: TextStyle(color: Colors.white, fontFamily: "Montserrat")),
-        ]));
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Press ',
+            style: TextStyle(color: Colors.white, fontFamily: "Montserrat")),
+        Icon(Icons.person_add, color: Colors.white),
+        Text(' to add someone here!',
+            style: TextStyle(color: Colors.white, fontFamily: "Montserrat")),
+      ]));
     } else {
       return ListView.builder(
         itemCount: controller.users.length,
         itemBuilder: (context, index) {
-          var element = controller.users[index];
-          return _item(element);
+          var element = controller.users[index].email;
+          return _item(element, controller.users[index].uid, controller.users[index].name);
         },
       );
     }
@@ -86,6 +78,9 @@ class _ChatTabState extends State<ChatTab> {
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: const Color.fromARGB(255, 2, 11, 44),
-        body: Center(child: _list()),
+        body: Center(
+            child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
+                child: _list())),
       );
 }

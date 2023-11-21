@@ -34,7 +34,7 @@ class UserController extends GetxController {
 
   // controller chat part
   // lista en la que se almacenan los uaurios, la misma es observada por la UI
-  final _users = <AppUser>[].obs;
+  var _users = <AppUser>[].obs;
 
   final databaseRef = FirebaseDatabase.instance.ref();
 
@@ -46,7 +46,6 @@ class UserController extends GetxController {
   // esa lista será usada para la pantalla en la que listan los usuarios con los que se
   // puede comenzar una conversación
   get users {
-    AuthenticationController authenticationController = Get.find();
     return _users
         .where((entry) => entry.uid != authenticationController.getUid())
         .toList();
@@ -90,13 +89,16 @@ class UserController extends GetxController {
   }
 
   // método para crear un nuevo usuario
-  Future<void> createUser(email, uid) async {
+  Future<void> createUser(name, username, email, uid) async {
     logInfo("Creating user in realTime for $email and $uid");
     try {
-      await databaseRef
-          .child('userList')
-          .push()
-          .set({'email': email, 'uid': uid});
+      await databaseRef.child('userList').push().set({
+        'name': name,
+        'username': username,
+        'email': email,
+        'salute': 'Using YouShare',
+        'uid': uid
+      });
     } catch (error) {
       logError(error);
       return Future.error(error);
@@ -106,5 +108,17 @@ class UserController extends GetxController {
   void login(String user, String password) async {
     // método usado para login
     await authenticationController.login(user, password);
+  }
+
+  void setUserData(mail) {
+    for (var i = 0; i < allUsers.length; i++) {
+      if (allUsers[i].email == mail) {
+        AppUser user = allUsers[i];
+        setName(user.name);
+        setUsername(user.username);
+        setEmail(mail);
+        setSalute(user.salute);
+      }
+    }
   }
 }

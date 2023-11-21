@@ -154,7 +154,7 @@ class _CreateBoxState extends State<CreateBox> {
                       user_controller.setEmail(_controller3.text);
                       user_controller.setUsername(_controller2.text);
                       user_controller.setName(_controller.text);
-                      aut_controller.signup(
+                      aut_controller.signup(_controller.text, _controller2.text,
                           _controller3.text, _controller4.text);
                       Get.offNamed('/home_page');
                       widget.changeMainPageIndex(0);
