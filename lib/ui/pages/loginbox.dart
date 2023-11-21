@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/controllers/authentication_controller.dart';
 import '../controllers/user_controller.dart';
 
 class LoginBox extends StatefulWidget {
@@ -17,6 +18,7 @@ class _LoginBoxState extends State<LoginBox> {
   @override
   Widget build(BuildContext context) {
     UserController user_controller = Get.find();
+    AuthenticationController aut_controller = Get.find();
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -45,6 +47,7 @@ class _LoginBoxState extends State<LoginBox> {
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: TextFormField(
                   style: const TextStyle(fontFamily: "Montserrat"),
+                  controller: _controller,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z@.]")),
                     LengthLimitingTextInputFormatter(50)
@@ -65,6 +68,7 @@ class _LoginBoxState extends State<LoginBox> {
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: TextFormField(
                   obscureText: true,
+                  controller: _controller2,
                   inputFormatters: [LengthLimitingTextInputFormatter(29)],
                   decoration: const InputDecoration(
                       filled: true,
@@ -101,10 +105,8 @@ class _LoginBoxState extends State<LoginBox> {
                   // BOTÓN LOG IN
                   ElevatedButton(
                     onPressed: () => {
-                      if(user_controller.checkAccountValid()){
-                        user_controller.setEmail(_controller.text),
-                        Get.offNamed('/home_page'),
-                      }
+                      aut_controller.login(
+                          _controller.text, _controller2.text),
                     },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size.fromHeight(40),

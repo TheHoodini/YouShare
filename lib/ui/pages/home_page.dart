@@ -1,9 +1,9 @@
-import 'dart:math';
-
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/controllers/authentication_controller.dart';
 import 'package:proychat/ui/controllers/location_controller.dart';
+import 'package:proychat/ui/controllers/user_controller.dart';
 
 // Tabs
 import 'package:proychat/ui/pages/tabs/map_tab.dart';
@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    AuthenticationController aut_controller = Get.find();
     double displayWidth = MediaQuery.of(context).size.width;
     Color uiColor = const Color.fromARGB(255, 0, 51, 124);
     Color iconColor = Colors.white;
@@ -152,8 +153,6 @@ class _HomePageState extends State<HomePage> {
             // ACCIONES MAP
             if (currentIndex == 0) {
               if (!sharingLocation) {
-                // locController.setLat((Random().nextDouble() - 0.5) * 180);
-                // locController.setLon((Random().nextDouble() - 0.5) * 360);
                 try {
                   await locController.getLocation();
                 } catch (e) {
@@ -182,7 +181,7 @@ class _HomePageState extends State<HomePage> {
               Get.toNamed('/add_page');
               // ACCIONES PROFILE
             } else if (currentIndex == 2) {
-              Get.offNamed('/auth_page');
+              aut_controller.logout();
             }
           },
           backgroundColor: const Color.fromARGB(255, 2, 155, 69),

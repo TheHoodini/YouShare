@@ -39,7 +39,7 @@ class _MapTabState extends State<MapTab> {
                   position:
                       LatLng(locController.userLocation.value.latitude, locController.userLocation.value.longitude),
                   infoWindow: InfoWindow(
-                    title: "Me",
+                    title: locController.lastActualization.toString().substring(locController.lastActualization.toString().length - 6, locController.lastActualization.toString().length - 1),
                     snippet: controller.name,
                   ),
                   visible: locController.markerVisibility), // Marker

@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/pages/home_page.dart';
+import 'package:proychat/ui/pages/tabs/chat_tab.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -78,6 +80,7 @@ class _AddPageState extends State<AddPage> {
                   // BOTÓN DE GUARDAR CONTACTO/USUARIO
                   child: ElevatedButton(
                     onPressed: () {
+                      
                       Get.back();
                       print("contact added");
                     },

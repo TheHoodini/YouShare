@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'package:loggy/loggy.dart';
@@ -53,7 +54,7 @@ class LocatorService {
     try {
       Position l = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
-      userLocation = UserLocation(latitude: l.latitude, longitude: l.longitude);
+      userLocation = UserLocation(latitude: l.latitude, longitude: l.longitude, time: TimeOfDay.now());
       return Future.value(userLocation);
     } catch (e) {
       return Future.error(e.toString());
@@ -80,7 +81,7 @@ class LocatorService {
       return Future.error(onError.toString());
     }).listen((Position? position) {
       if (position != null) {
-        _locationStreamController.add(UserLocation.fromPosition(position));
+        _locationStreamController.add(UserLocation.fromPosition(position, TimeOfDay.now()));
       }
     });
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/controllers/authentication_controller.dart';
 import 'package:proychat/ui/controllers/user_controller.dart';
 
 class CreateBox extends StatefulWidget {
@@ -18,6 +19,7 @@ class _CreateBoxState extends State<CreateBox> {
   @override
   Widget build(BuildContext context) {
     UserController user_controller = Get.find();
+    AuthenticationController aut_controller = Get.find();
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: const BoxConstraints(
@@ -152,6 +154,8 @@ class _CreateBoxState extends State<CreateBox> {
                       user_controller.setEmail(_controller3.text);
                       user_controller.setUsername(_controller2.text);
                       user_controller.setName(_controller.text);
+                      aut_controller.signup(
+                          _controller3.text, _controller4.text);
                       Get.offNamed('/home_page');
                       widget.changeMainPageIndex(0);
                     }

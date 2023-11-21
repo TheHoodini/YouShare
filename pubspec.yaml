@@ -47,6 +47,9 @@ dependencies:
   google_fonts: ^4.0.4
   geolocator: ^10.1.0
   google_maps_flutter: ^2.5.0
+  firebase_core: ^2.22.0
+  firebase_database: ^10.3.4
+  firebase_auth: ^4.14.0
   
 dev_dependencies:
   flutter_test:

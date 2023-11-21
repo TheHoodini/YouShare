@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "377275196659",
+    "project_id": "youshare-cbc73",
+    "storage_bucket": "youshare-cbc73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377275196659:android:e11f9a2efe678256214386",
+        "android_client_info": {
+          "package_name": "com.example.proychat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4mWqPn0dnLGXbl77HSFWy54P3SGdMwFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

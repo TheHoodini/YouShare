@@ -1,13 +1,18 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 class UserLocation {
+  //final String email;
   final double latitude;
   final double longitude;
+  final TimeOfDay time;
 
-  UserLocation({required this.latitude, required this.longitude});
+  UserLocation({/*required this.email,*/ required this.latitude, required this.longitude, required this.time});
 
-  static UserLocation fromPosition(Position position) {
+  static UserLocation fromPosition(/*String email,*/ Position position, TimeOfDay date) {
     return UserLocation(
-        latitude: position.latitude, longitude: position.longitude);
+        /*email: email,*/ latitude: position.latitude, longitude: position.longitude, time: date);
   }
 }
