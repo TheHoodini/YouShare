@@ -22,6 +22,7 @@ class _ChatPageState extends State<ChatPage> {
   late ScrollController _scrollController;
   late String remoteUserUid;
   late String remoteEmail;
+  late String remoteName;
 
   // obtenemos los parámetros del sistema de navegación
   dynamic argumentData = Get.arguments;
@@ -36,6 +37,7 @@ class _ChatPageState extends State<ChatPage> {
     // obtenemos los datos del usuario con el cual se va a iniciar el chat de los argumentos
     remoteUserUid = argumentData[0];
     remoteEmail = argumentData[1];
+    remoteName = argumentData[2];
 
     // instanciamos los controladores
     _controller = TextEditingController();
@@ -55,18 +57,52 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _item(Message element, int posicion, String uid) {
-    return Card(
-      margin: const EdgeInsets.all(4.0),
-      // cambiamos el color dependiendo de quién mandó el usuario
-      color: uid == element.senderUid ? Colors.yellow[200] : Colors.grey[300],
-      child: ListTile(
-        title: Text(
-          element.msg,
-          textAlign:
-              // cambiamos el textAlign dependiendo de quién mandó el usuario
-              uid == element.senderUid ? TextAlign.right : TextAlign.left,
+    return Row(
+      mainAxisAlignment: uid == element.senderUid
+          ? MainAxisAlignment.end
+          : MainAxisAlignment.start,
+      children: [
+        Flexible(
+          child: Card(
+            // Forma del texto dependiendo del usuario
+            shape: uid == element.senderUid
+                ? const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                    ),
+                  )
+                : const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                    ),
+                  ),
+            // Márgenes
+            margin: uid == element.senderUid
+                ? const EdgeInsets.fromLTRB(210, 4, 3, 0)
+                : const EdgeInsets.fromLTRB(3, 4, 210, 0),
+            color: uid == element.senderUid
+                ? const Color.fromARGB(255, 13, 147, 71)
+                : const Color.fromARGB(255, 0, 39, 93),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                element.msg,
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                  fontFamily: "Montserrat",
+                ),
+                textAlign:
+                    uid == element.senderUid ? TextAlign.right : TextAlign.left,
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -99,28 +135,43 @@ class _ChatPageState extends State<ChatPage> {
         Expanded(
           flex: 3,
           child: Container(
-            margin: const EdgeInsets.only(left: 5.0, top: 5.0),
-            child: TextField(
-              key: const Key('MsgTextField'),
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Your message',
+            margin: const EdgeInsets.only(left: 5.0, top: 5.0, right: 8),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(32.0),
+              child: TextField(
+                style: const TextStyle(fontFamily: "Montserrat"),
+                key: const Key('MsgTextField'),
+                decoration: const InputDecoration(
+                    labelStyle: TextStyle(
+                        color: Color.fromARGB(255, 97, 97, 97),
+                        fontFamily: "Montserrat"),
+                    border: OutlineInputBorder(),
+                    labelText: 'Your message',
+                    floatingLabelBehavior: FloatingLabelBehavior.never),
+                onSubmitted: (value) {
+                  _sendMsg(_controller.text);
+                  _controller.clear();
+                },
+                controller: _controller,
               ),
-              onSubmitted: (value) {
-                _sendMsg(_controller.text);
-                _controller.clear();
-              },
-              controller: _controller,
             ),
           ),
         ),
-        TextButton(
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+          child: FloatingActionButton(
+            shape: const CircleBorder(),
             key: const Key('sendButton'),
-            child: const Text('Send'),
             onPressed: () {
-              _sendMsg(_controller.text);
-              _controller.clear();
-            })
+              if (_controller.text.isNotEmpty) {
+                _sendMsg(_controller.text);
+                _controller.clear();
+              }
+            },
+            backgroundColor: const Color.fromARGB(255, 2, 155, 69),
+            child: const Icon(Icons.send, color: Colors.white),
+          ),
+        ),
       ],
     );
   }
@@ -134,11 +185,29 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToEnd());
     return Scaffold(
-        appBar: AppBar(title: Text("Chat with $remoteEmail")),
+        backgroundColor: const Color.fromARGB(255, 2, 11, 44),
+        appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: Text("Chat with $remoteName",
+              style: const TextStyle(
+                  color: Colors.white, fontFamily: 'Montserrat')),
+          backgroundColor: const Color.fromARGB(255, 0, 51, 124),
+          bottom: const PreferredSize(
+            preferredSize: Size.fromHeight(0.1), // Altura de la línea
+            child: Divider(
+              color: Color.fromARGB(80, 255, 255, 255), // Color de la línea
+              height: 0.0, // Grosor de la línea
+            ),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 25.0),
           child: Column(
-            children: [Expanded(flex: 4, child: _list()), _textInput()],
+            children: [
+              Expanded(flex: 4, child: _list()),
+              const SizedBox(height: 10),
+              _textInput()
+            ],
           ),
         ));
   }

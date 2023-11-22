@@ -18,7 +18,7 @@ class _LoginBoxState extends State<LoginBox> {
   @override
   Widget build(BuildContext context) {
     UserController controller = Get.find();
-    AuthenticationController aut_controller = Get.find();
+    AuthenticationController autController = Get.find();
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -105,8 +105,8 @@ class _LoginBoxState extends State<LoginBox> {
                   // BOTÓN LOG IN
                   ElevatedButton(
                     onPressed: () => {
-                      aut_controller.login(_controller.text, _controller2.text),
-                      controller.setEmail(_controller.text)
+                      autController.login(_controller.text, _controller2.text),
+                      controller.setEmail(_controller.text),
                     },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size.fromHeight(40),

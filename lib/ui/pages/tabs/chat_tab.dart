@@ -37,17 +37,28 @@ class _ChatTabState extends State<ChatTab> {
     }
   }
 
-  Widget _item(String element, uid, name) {
+  Widget _item(String element, uid, name, username) {
     // Widget usado en la lista de los usuarios
     // mostramos el correo y uid
     return Card(
+      color: const Color.fromARGB(255, 5, 22, 84),
+      elevation: 5,
       margin: const EdgeInsets.all(4.0),
       child: ListTile(
         onTap: () {
-          Get.to(() => const ChatPage(), arguments: [uid, element]);
+          Get.to(() => const ChatPage(), arguments: [uid, element, name]);
         },
-        title: Text(name),
-        subtitle: Text(element),
+        title: Text(
+          name,
+          style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: "Montserrat"),
+        ),
+        subtitle: Text(
+          "@$username",
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w200,fontFamily: "Montserrat"),
+        ),
       ),
     );
   }
@@ -69,7 +80,8 @@ class _ChatTabState extends State<ChatTab> {
         itemCount: controller.users.length,
         itemBuilder: (context, index) {
           var element = controller.users[index].email;
-          return _item(element, controller.users[index].uid, controller.users[index].name);
+          return _item(element, controller.users[index].uid,
+              controller.users[index].name, controller.users[index].username);
         },
       );
     }

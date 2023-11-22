@@ -165,9 +165,15 @@ class _HomePageState extends State<HomePage> {
                   await locController.getLocation();
                 } catch (e) {
                   Get.snackbar("Error", e.toString(),
-                      backgroundColor: Colors.red, colorText: Colors.white);
+                      backgroundColor: Colors.red,
+                      colorText: Colors.white,
+                      icon: const Icon(
+                        Icons.warning,
+                        color: Colors.white,
+                      ));
                 }
                 locController.setLastAct(TimeOfDay.now());
+                // ignore: use_build_context_synchronously
                 showSnackbar(context, "   Now sharing location",
                     Icons.where_to_vote_rounded);
                 setState(() {
