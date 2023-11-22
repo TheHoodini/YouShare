@@ -82,8 +82,8 @@ class _ChatPageState extends State<ChatPage> {
                   ),
             // Márgenes
             margin: uid == element.senderUid
-                ? const EdgeInsets.fromLTRB(210, 4, 3, 0)
-                : const EdgeInsets.fromLTRB(3, 4, 210, 0),
+                ? const EdgeInsets.fromLTRB(120, 4, 3, 0)
+                : const EdgeInsets.fromLTRB(3, 4, 120, 0),
             color: uid == element.senderUid
                 ? const Color.fromARGB(255, 13, 147, 71)
                 : const Color.fromARGB(255, 0, 39, 93),
@@ -92,7 +92,7 @@ class _ChatPageState extends State<ChatPage> {
               child: Text(
                 element.msg,
                 style: const TextStyle(
-                  fontSize: 15,
+                  fontSize: 14,
                   color: Colors.white,
                   fontFamily: "Montserrat",
                 ),

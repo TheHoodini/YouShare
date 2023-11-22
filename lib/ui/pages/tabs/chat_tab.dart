@@ -37,7 +37,7 @@ class _ChatTabState extends State<ChatTab> {
     }
   }
 
-  Widget _item(String element, uid, name, username) {
+  Widget _item(String element, uid, name, username, salute) {
     // Widget usado en la lista de los usuarios
     // mostramos el correo y uid
     return Card(
@@ -56,7 +56,7 @@ class _ChatTabState extends State<ChatTab> {
               fontFamily: "Montserrat"),
         ),
         subtitle: Text(
-          "@$username",
+          "@$username - $salute",
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w200,fontFamily: "Montserrat"),
         ),
       ),
@@ -81,7 +81,7 @@ class _ChatTabState extends State<ChatTab> {
         itemBuilder: (context, index) {
           var element = controller.users[index].email;
           return _item(element, controller.users[index].uid,
-              controller.users[index].name, controller.users[index].username);
+              controller.users[index].name, controller.users[index].username, controller.users[index].salute);
         },
       );
     }
