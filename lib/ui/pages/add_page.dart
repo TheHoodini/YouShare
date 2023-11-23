@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -112,8 +113,18 @@ class _AddPageState extends State<AddPage> {
                         ]);
                         Get.back();
                         print("contact added");
+                      } else if (username == controller.username) {
+                        showSnackbar(
+                            context,
+                            "You can't add yourself, try with a different user",
+                            Icons.warning_rounded,
+                            "Error");
                       } else {
-                        print("Usuario Inválido");
+                        showSnackbar(
+                            context,
+                            "User not found, please type a different one",
+                            Icons.warning_rounded,
+                            "Error");
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -131,4 +142,25 @@ class _AddPageState extends State<AddPage> {
       ),
     );
   }
+
+  void showSnackbar(
+          BuildContext context, String texto, IconData icono, String titulo) =>
+      Flushbar(
+        titleText: Text(titulo,
+            style: const TextStyle(
+                fontFamily: "Montserrat",
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+        icon: Icon(icono, size: 32, color: Colors.black),
+        shouldIconPulse: false,
+        messageText: Text(texto,
+            style:
+                const TextStyle(fontFamily: "Montserrat", color: Colors.black)),
+        duration: const Duration(seconds: 2),
+        flushbarPosition: FlushbarPosition.TOP,
+        margin: const EdgeInsets.fromLTRB(120, 2, 120, 0),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        barBlur: 20,
+        backgroundColor: const Color.fromARGB(255, 249, 195, 18),
+      )..show(context);
 }

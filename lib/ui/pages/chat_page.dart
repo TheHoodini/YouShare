@@ -6,7 +6,6 @@ import '../../data/model/message.dart';
 import '../controllers/authentication_controller.dart';
 import '../controllers/chatController.dart';
 
-
 // Widget con la interfaz del chat
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -96,8 +95,6 @@ class _ChatPageState extends State<ChatPage> {
                   color: Colors.white,
                   fontFamily: "Montserrat",
                 ),
-                textAlign:
-                    uid == element.senderUid ? TextAlign.right : TextAlign.left,
               ),
             ),
           ),
@@ -149,8 +146,11 @@ class _ChatPageState extends State<ChatPage> {
                     labelText: 'Your message',
                     floatingLabelBehavior: FloatingLabelBehavior.never),
                 onSubmitted: (value) {
-                  _sendMsg(_controller.text);
-                  _controller.clear();
+                  if (_controller.text.isNotEmpty &
+                      !stringVacio(_controller.text)) {
+                    _sendMsg(eliminarEspacios(_controller.text));
+                    _controller.clear();
+                  }
                 },
                 controller: _controller,
               ),
@@ -163,8 +163,9 @@ class _ChatPageState extends State<ChatPage> {
             shape: const CircleBorder(),
             key: const Key('sendButton'),
             onPressed: () {
-              if (_controller.text.isNotEmpty) {
-                _sendMsg(_controller.text);
+              if (_controller.text.isNotEmpty &
+                  !stringVacio(_controller.text)) {
+                _sendMsg(eliminarEspacios(_controller.text));
                 _controller.clear();
               }
             },
@@ -210,5 +211,13 @@ class _ChatPageState extends State<ChatPage> {
             ],
           ),
         ));
+  }
+
+  bool stringVacio(String cadena) {
+    return cadena.trim().isEmpty;
+  }
+
+  String eliminarEspacios(String cadena) {
+    return cadena.trim();
   }
 }

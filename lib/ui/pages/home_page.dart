@@ -182,28 +182,28 @@ class _HomePageState extends State<HomePage> {
                     locController.userLocation.value.latitude,
                     locController.userLocation.value.longitude,
                     locController.lastActualization.hour,
-                    locController.lastActualization.minute
+                    locController.lastActualization.minute,
+                    locController.setLastAct(TimeOfDay.now()),
+                    // ignore: use_build_context_synchronously
+                    showSnackbar(context, "Now sharing location",
+                        Icons.where_to_vote_rounded),
+                    setState(() {
+                      sharingLocation = true;
+                      currentFloatingButtonIcon = Icons.location_off;
+                      locController.makerVisibility(sharingLocation);
+                    })
                   ]);
                 } catch (e) {
                   Get.snackbar("Error", e.toString(),
-                      backgroundColor: Colors.red,
-                      colorText: Colors.white,
+                      backgroundColor: const Color.fromARGB(255, 249, 195, 18),
+                      colorText: Colors.black,
                       icon: const Icon(
-                        Icons.warning,
-                        color: Colors.white,
+                        Icons.warning_rounded,
+                        color: Colors.black,
                       ));
                 }
-                locController.setLastAct(TimeOfDay.now());
-                // ignore: use_build_context_synchronously
-                showSnackbar(context, "   Now sharing location",
-                    Icons.where_to_vote_rounded);
-                setState(() {
-                  sharingLocation = true;
-                  currentFloatingButtonIcon = Icons.location_off;
-                  locController.makerVisibility(sharingLocation);
-                });
               } else {
-                showSnackbar(context, "   Location share ended",
+                showSnackbar(context, "Location share ended",
                     Icons.wrong_location_rounded);
                 setState(() {
                   sharingLocation = false;
@@ -217,6 +217,7 @@ class _HomePageState extends State<HomePage> {
               // ACCIONES PROFILE
             } else if (currentIndex == 2) {
               aut_controller.logout();
+              locController.makerVisibility(false);
             }
           },
           backgroundColor: const Color.fromARGB(255, 2, 155, 69),
@@ -237,9 +238,9 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.w300)),
         duration: const Duration(seconds: 2),
         flushbarPosition: FlushbarPosition.TOP,
-        margin: const EdgeInsets.fromLTRB(130, 2, 130, 0),
+        margin: const EdgeInsets.fromLTRB(140, 2, 140, 0),
         borderRadius: const BorderRadius.all(Radius.circular(16)),
-        barBlur: 20,
-        backgroundColor: const Color.fromARGB(180, 2, 155, 69),
+        //barBlur: 20,
+        backgroundColor: const Color.fromARGB(255, 2, 155, 69),
       )..show(context);
 }
