@@ -18,20 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final PageController _pageController = PageController(initialPage: 0);
-  int currentIndex = 0;
-  bool sharingLocation = false;
-
-  final screens = const [
-    MapTab(),
-    ChatTab(),
-    ProfileTab(),
-  ];
-
-  IconData currentFloatingButtonIcon = Icons.location_on;
-  UserController controller = Get.find();
-  LocationController locController = Get.find();
-  AuthenticationController aut_controller = Get.find();
 
   @override
   void initState() {
@@ -46,6 +32,21 @@ class _HomePageState extends State<HomePage> {
     controller.stop();
     super.dispose();
   }
+
+  final PageController _pageController = PageController(initialPage: 0);
+  int currentIndex = 0;
+  bool sharingLocation = false;
+
+  final screens = const [
+    MapTab(),
+    ChatTab(),
+    ProfileTab(),
+  ];
+
+  IconData currentFloatingButtonIcon = Icons.location_on;
+  UserController controller = Get.find();
+  LocationController locController = Get.find();
+  AuthenticationController aut_controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -172,6 +173,7 @@ class _HomePageState extends State<HomePage> {
               if (!sharingLocation) {
                 try {
                   await locController.getLocation();
+                  locController.setLastAct(TimeOfDay.now());
                   aut_controller.editUser(
                       controller.name,
                       controller.username,
@@ -182,17 +184,16 @@ class _HomePageState extends State<HomePage> {
                     locController.userLocation.value.latitude,
                     locController.userLocation.value.longitude,
                     locController.lastActualization.hour,
-                    locController.lastActualization.minute,
-                    locController.setLastAct(TimeOfDay.now()),
-                    // ignore: use_build_context_synchronously
-                    showSnackbar(context, "Now sharing location",
-                        Icons.where_to_vote_rounded),
-                    setState(() {
-                      sharingLocation = true;
-                      currentFloatingButtonIcon = Icons.location_off;
-                      locController.makerVisibility(sharingLocation);
-                    })
+                    locController.lastActualization.minute
                   ]);
+                  // ignore: use_build_context_synchronously
+                  showSnackbar(context, "Now sharing location",
+                      Icons.where_to_vote_rounded);
+                  setState(() {
+                    sharingLocation = true;
+                    currentFloatingButtonIcon = Icons.location_off;
+                    locController.makerVisibility(sharingLocation);
+                  });
                 } catch (e) {
                   Get.snackbar("Error", e.toString(),
                       backgroundColor: const Color.fromARGB(255, 249, 195, 18),

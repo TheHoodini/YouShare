@@ -157,6 +157,7 @@ class UserController extends GetxController {
         setFriendList(user.friends);
         setKey(user.key);
         print("Done!-------------------");
+        break;
       }
     }
   }

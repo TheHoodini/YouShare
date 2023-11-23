@@ -81,7 +81,6 @@ class _ChatTabState extends State<ChatTab> {
           for (i = 0; i < controller.users.length; i++) {
             if (usernameVar == controller.users[i].username) {
               friend = true;
-              print(usernameVar);
               break;
             }
           }
@@ -93,6 +92,7 @@ class _ChatTabState extends State<ChatTab> {
                 controller.users[i].username,
                 controller.users[i].salute);
           }
+          return null;
         },
       );
     }

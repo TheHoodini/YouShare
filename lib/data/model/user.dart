@@ -7,10 +7,11 @@ class AppUser {
   String email;
   String salute;
   String uid;
+  List location;
   List friends;
 
   AppUser(this.name, this.username, this.key, this.email, this.salute, this.uid,
-      this.friends);
+      this.location, this.friends);
 
   AppUser.fromJson(DataSnapshot snapshot, Map<dynamic, dynamic> json)
       : key = snapshot.key ?? "0",
@@ -19,6 +20,7 @@ class AppUser {
         email = json['email'] ?? "email",
         salute = json['salute'] ?? 'Hey there! I\'m using YouShare.',
         uid = json['uid'] ?? "uid",
+        location = json['location'] ?? "location",
         friends = json['friendList'] ?? [];
 
   toJson() {
@@ -28,6 +30,7 @@ class AppUser {
       "email": email,
       "salute": salute,
       "uid": uid,
+      "location": location,
       "friends": friends
     };
   }
