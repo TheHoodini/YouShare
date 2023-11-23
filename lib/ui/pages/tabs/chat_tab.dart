@@ -22,13 +22,6 @@ class _ChatTabState extends State<ChatTab> {
   AuthenticationController authenticationController = Get.find();
   ChatController chatController = Get.find();
 
-  @override
-  void dispose() {
-    // le decimos al userController que se cierre los streams
-    controller.stop();
-    super.dispose();
-  }
-
   _logout() async {
     try {
       await authenticationController.logout();
@@ -57,7 +50,10 @@ class _ChatTabState extends State<ChatTab> {
         ),
         subtitle: Text(
           "@$username - $salute",
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w200,fontFamily: "Montserrat"),
+          style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w200,
+              fontFamily: "Montserrat"),
         ),
       ),
     );
@@ -66,7 +62,7 @@ class _ChatTabState extends State<ChatTab> {
   Widget _list() {
     // Un widget con La lista de los usuarios con una validación para cuándo la misma este vacia
     // la lista de usuarios la obtenemos del userController
-    if (controller.users.isEmpty) {
+    if (controller.users.isEmpty || controller.friends.isEmpty) {
       return const Center(
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Press ',
@@ -77,11 +73,26 @@ class _ChatTabState extends State<ChatTab> {
       ]));
     } else {
       return ListView.builder(
-        itemCount: controller.users.length,
+        itemCount: controller.friends.length,
         itemBuilder: (context, index) {
-          var element = controller.users[index].email;
-          return _item(element, controller.users[index].uid,
-              controller.users[index].name, controller.users[index].username, controller.users[index].salute);
+          var usernameVar = controller.friends[index];
+          bool friend = false;
+          var i = 0;
+          for (i = 0; i < controller.users.length; i++) {
+            if (usernameVar == controller.users[i].username) {
+              friend = true;
+              print(usernameVar);
+              break;
+            }
+          }
+          if (friend) {
+            return _item(
+                controller.users[i].email,
+                controller.users[i].uid,
+                controller.users[i].name,
+                controller.users[i].username,
+                controller.users[i].salute);
+          }
         },
       );
     }

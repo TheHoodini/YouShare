@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/controllers/authentication_controller.dart';
+import 'package:proychat/ui/controllers/location_controller.dart';
+import 'package:proychat/ui/controllers/user_controller.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -13,6 +16,11 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
   Color mainTextColor = Colors.white;
   final _formKey = GlobalKey<FormState>();
+  UserController controller = Get.find();
+  AuthenticationController aut_controller = Get.find();
+  LocationController locController = Get.find();
+
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +65,10 @@ class _AddPageState extends State<AddPage> {
                   padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
                   child: TextFormField(
                       style: const TextStyle(fontFamily: "Montserrat"),
+                      controller: _controller,
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z_]"))
+                        FilteringTextInputFormatter.allow(
+                            RegExp("[0-9a-zA-Z_]"))
                       ],
                       decoration: const InputDecoration(
                           filled: true,
@@ -78,8 +88,33 @@ class _AddPageState extends State<AddPage> {
                   // BOTÓN DE GUARDAR CONTACTO/USUARIO
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.back();
-                      print("contact added");
+                      bool valid = false;
+                      String username = _controller.text;
+                      for (var i = 0; i < controller.users.length; i++) {
+                        if (username == controller.users[i].username) {
+                          valid = true;
+                          break;
+                        }
+                      }
+                      if (valid) {
+                        controller.addFriend(username);
+                        aut_controller.editUser(
+                            controller.name,
+                            controller.username,
+                            controller.email,
+                            controller.password,
+                            controller.key,
+                            controller.friends, [
+                          locController.userLocation.value.latitude,
+                          locController.userLocation.value.longitude,
+                          locController.lastActualization.hour,
+                          locController.lastActualization.minute
+                        ]);
+                        Get.back();
+                        print("contact added");
+                      } else {
+                        print("Usuario Inválido");
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 2, 155, 69)),

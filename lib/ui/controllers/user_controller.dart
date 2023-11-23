@@ -13,21 +13,33 @@ class UserController extends GetxController {
   final _username = 'username'.obs;
   final _name = 'Name'.obs;
   final _email = 'name@mail.com'.obs;
+  final _password = ''.obs;
   final _salute = 'Hey! I\'m using YouShare'.obs;
 
+  final _friends = [].obs;
+  final _key = ''.obs;
   final _isEditing = false.obs;
 
   String get username => _username.value;
   String get name => _name.value;
   String get email => _email.value;
+  String get password => _password.value;
   String get salute => _salute.value;
   bool get isEditing => _isEditing.value;
+  List get friends => _friends.value;
+  String get key => _key.value;
 
   setUsername(newValue) => _username.value = newValue;
   setName(newValue) => _name.value = newValue;
   setEmail(newValue) => _email.value = newValue;
+  setPassword(newValue) => _password.value = newValue;
   setSalute(newValue) => _salute.value = newValue;
   setIsEditing(newValue) => _isEditing.value = newValue;
+  setFriendList(newValue) => _friends.value = newValue;
+  setKey(newValue) => _key.value = newValue;
+
+  addFriend(newValue) => _friends.add(newValue);
+  removeFriend(newValue) => _friends.remove(newValue);
 
   //Methods
   bool createAccount() => true;
@@ -92,12 +104,35 @@ class UserController extends GetxController {
   Future<void> createUser(name, username, email, uid) async {
     logInfo("Creating user in realTime for $email and $uid");
     try {
-      await databaseRef.child('userList').push().set({
+      var key = await databaseRef.child('userList').push().key!;
+      await databaseRef.child('userList').child(key).set({
         'name': name,
         'username': username,
         'email': email,
         'salute': 'Using YouShare',
-        'uid': uid
+        'uid': uid,
+        'key': key,
+        'location': [0, 0, 0, 0]
+      });
+    } catch (error) {
+      logError(error);
+      return Future.error(error);
+    }
+  }
+
+  Future<void> updateUser(
+      name, username, email, uid, key, friendList, location) async {
+    logInfo("Updating user in realTime for $email and $uid");
+    try {
+      await databaseRef.child('userList').child(key).update({
+        'name': name,
+        'username': username,
+        'email': email,
+        'salute': 'Using YouShare',
+        'uid': uid,
+        'key': key,
+        'friendList': friendList,
+        'location': location
       });
     } catch (error) {
       logError(error);
@@ -111,6 +146,7 @@ class UserController extends GetxController {
   }
 
   void setUserData(mail) {
+    print("$allUsers -- all users");
     for (var i = 0; i < allUsers.length; i++) {
       if (allUsers[i].email == mail) {
         AppUser user = allUsers[i];
@@ -118,6 +154,9 @@ class UserController extends GetxController {
         setUsername(user.username);
         setEmail(mail);
         setSalute(user.salute);
+        setFriendList(user.friends);
+        setKey(user.key);
+        print("Done!-------------------");
       }
     }
   }

@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   IconData currentFloatingButtonIcon = Icons.location_on;
   UserController controller = Get.find();
   LocationController locController = Get.find();
+  AuthenticationController aut_controller = Get.find();
 
   @override
   void initState() {
@@ -40,8 +41,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    // le decimos al userController que se cierre los streams
+    controller.stop();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    AuthenticationController aut_controller = Get.find();
+    controller.setUserData(controller.email);
+    print(controller.friends);
     double displayWidth = MediaQuery.of(context).size.width;
     Color uiColor = const Color.fromARGB(255, 0, 51, 124);
     Color iconColor = Colors.white;
@@ -163,6 +172,18 @@ class _HomePageState extends State<HomePage> {
               if (!sharingLocation) {
                 try {
                   await locController.getLocation();
+                  aut_controller.editUser(
+                      controller.name,
+                      controller.username,
+                      controller.email,
+                      controller.password,
+                      controller.key,
+                      controller.friends, [
+                    locController.userLocation.value.latitude,
+                    locController.userLocation.value.longitude,
+                    locController.lastActualization.hour,
+                    locController.lastActualization.minute
+                  ]);
                 } catch (e) {
                   Get.snackbar("Error", e.toString(),
                       backgroundColor: Colors.red,

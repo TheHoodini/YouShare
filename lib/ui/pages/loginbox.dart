@@ -107,6 +107,7 @@ class _LoginBoxState extends State<LoginBox> {
                     onPressed: () => {
                       autController.login(_controller.text, _controller2.text),
                       controller.setEmail(_controller.text),
+                      controller.setPassword(_controller2.text)
                     },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size.fromHeight(40),

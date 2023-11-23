@@ -7,7 +7,9 @@ class LocationController extends GetxController {
   LocatorService service = Get.find();
 
   //variables y funciones del controlador
-  var userLocation = UserLocation(latitude: 0, longitude: 0, time: const TimeOfDay(hour: 0, minute: 0)).obs;
+  var userLocation = UserLocation(
+          latitude: 0, longitude: 0, time: const TimeOfDay(hour: 0, minute: 0))
+      .obs;
   final _lastActualization = const TimeOfDay(hour: 12, minute: 22).obs;
   final _markerVisibility = false.obs;
 
@@ -23,6 +25,7 @@ class LocationController extends GetxController {
         await service.getLocation().onError((error, stackTrace) {
       return Future.error(error.toString());
     });
+    setLastAct(TimeOfDay.now());
   }
 
   Future<void> subscribeLocationUpdate() async {}

@@ -25,7 +25,6 @@ class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     UserController user_controller = Get.find();
-    user_controller.setUserData(user_controller.email);
     return Scaffold(
       backgroundColor: uiColor,
       body: ListView(
