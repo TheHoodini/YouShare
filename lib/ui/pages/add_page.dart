@@ -109,7 +109,8 @@ class _AddPageState extends State<AddPage> {
                           locController.userLocation.value.latitude,
                           locController.userLocation.value.longitude,
                           locController.lastActualization.hour,
-                          locController.lastActualization.minute
+                          locController.lastActualization.minute,
+                          locController.markerVisibility
                         ]);
                         Get.back();
                         print("contact added");
