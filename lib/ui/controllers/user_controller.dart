@@ -14,7 +14,7 @@ class UserController extends GetxController {
   final _name = 'Name'.obs;
   final _email = 'name@mail.com'.obs;
   final _password = ''.obs;
-  final _salute = 'Hey! I\'m using YouShare'.obs;
+  final _salute = 'Using YouShare'.obs;
 
   final _friends = [].obs;
   final _key = ''.obs;
@@ -112,7 +112,7 @@ class UserController extends GetxController {
         'salute': 'Using YouShare',
         'uid': uid,
         'key': key,
-        'location': [0, 0, 0, 0]
+        'location': [0, 0, 0, 0, false]
       });
     } catch (error) {
       logError(error);
@@ -156,6 +156,7 @@ class UserController extends GetxController {
         setSalute(user.salute);
         setFriendList(user.friends);
         setKey(user.key);
+        
         print("Done!-------------------");
         break;
       }

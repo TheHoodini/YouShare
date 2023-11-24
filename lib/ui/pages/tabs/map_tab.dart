@@ -22,11 +22,12 @@ class _MapTabState extends State<MapTab> {
     mapController = controller;
   }
 
-  Marker friend(name, hour, minut, lat, long) {
+  Marker friend(name, hour, minut, lat, long, visibility) {
     return Marker(
         markerId: MarkerId(name),
         position: LatLng(lat, long),
-        infoWindow: InfoWindow(title: "$hour:$minut", snippet: name));
+        infoWindow: InfoWindow(title: "$hour:$minut", snippet: name),
+        visible: visibility);
   }
 
   Set<Marker> friendMarkers() {
@@ -59,7 +60,8 @@ class _MapTabState extends State<MapTab> {
           controller.users[j].location[2],
           controller.users[j].location[3],
           controller.users[j].location[0],
-          controller.users[j].location[1]
+          controller.users[j].location[1],
+          controller.users[j].location[4],
         ));
       }
     }

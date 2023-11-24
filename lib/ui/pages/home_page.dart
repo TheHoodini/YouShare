@@ -18,7 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void initState() {
     // le decimos al userController que se suscriba a los streams
@@ -35,7 +34,6 @@ class _HomePageState extends State<HomePage> {
 
   final PageController _pageController = PageController(initialPage: 0);
   int currentIndex = 0;
-  bool sharingLocation = false;
 
   final screens = const [
     MapTab(),
@@ -46,7 +44,9 @@ class _HomePageState extends State<HomePage> {
   IconData currentFloatingButtonIcon = Icons.location_on;
   UserController controller = Get.find();
   LocationController locController = Get.find();
-  AuthenticationController aut_controller = Get.find();
+  AuthenticationController autController = Get.find();
+  // LOCATION
+  bool sharingLocation = false;
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                 try {
                   await locController.getLocation();
                   locController.setLastAct(TimeOfDay.now());
-                  aut_controller.editUser(
+                  autController.editUser(
                       controller.name,
                       controller.username,
                       controller.email,
@@ -184,8 +184,10 @@ class _HomePageState extends State<HomePage> {
                     locController.userLocation.value.latitude,
                     locController.userLocation.value.longitude,
                     locController.lastActualization.hour,
-                    locController.lastActualization.minute
+                    locController.lastActualization.minute,
+                    !sharingLocation
                   ]);
+                  print(locController.markerVisibility);
                   // ignore: use_build_context_synchronously
                   showSnackbar(context, "Now sharing location",
                       Icons.where_to_vote_rounded);
@@ -204,6 +206,19 @@ class _HomePageState extends State<HomePage> {
                       ));
                 }
               } else {
+                autController.editUser(
+                    controller.name,
+                    controller.username,
+                    controller.email,
+                    controller.password,
+                    controller.key,
+                    controller.friends, [
+                  locController.userLocation.value.latitude,
+                  locController.userLocation.value.longitude,
+                  locController.lastActualization.hour,
+                  locController.lastActualization.minute,
+                  !sharingLocation
+                ]);
                 showSnackbar(context, "Location share ended",
                     Icons.wrong_location_rounded);
                 setState(() {
@@ -217,8 +232,20 @@ class _HomePageState extends State<HomePage> {
               Get.toNamed('/add_page');
               // ACCIONES PROFILE
             } else if (currentIndex == 2) {
-              aut_controller.logout();
-              locController.makerVisibility(false);
+              autController.logout();
+              autController.editUser(
+                      controller.name,
+                      controller.username,
+                      controller.email,
+                      controller.password,
+                      controller.key,
+                      controller.friends, [
+                    locController.userLocation.value.latitude,
+                    locController.userLocation.value.longitude,
+                    locController.lastActualization.hour,
+                    locController.lastActualization.minute,
+                    false
+                  ]);
             }
           },
           backgroundColor: const Color.fromARGB(255, 2, 155, 69),

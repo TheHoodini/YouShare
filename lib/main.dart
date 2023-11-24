@@ -25,10 +25,10 @@ void main() async {
   ));
 
   Get.put(ChatController());
-  Get.put(AuthenticationController());
-  Get.put(UserController());
   Get.put(LocatorService());
   Get.put(LocationController());
+  Get.put(AuthenticationController());
+  Get.put(UserController());
 
   runApp(const MyApp());
 }
