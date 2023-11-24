@@ -232,6 +232,7 @@ class _HomePageState extends State<HomePage> {
               Get.toNamed('/add_page');
               // ACCIONES PROFILE
             } else if (currentIndex == 2) {
+              locController.makerVisibility(false);
               autController.logout();
               autController.editUser(
                       controller.name,
