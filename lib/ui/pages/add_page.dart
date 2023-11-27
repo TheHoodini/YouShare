@@ -102,6 +102,7 @@ class _AddPageState extends State<AddPage> {
                         aut_controller.editUser(
                             controller.name,
                             controller.username,
+                            controller.salute,
                             controller.email,
                             controller.password,
                             controller.key,
@@ -117,7 +118,7 @@ class _AddPageState extends State<AddPage> {
                       } else if (username == controller.username) {
                         showSnackbar(
                             context,
-                            "You can't add yourself, try with a different user",
+                            "You can't add yourself, please try with a different user",
                             Icons.warning_rounded,
                             "Error");
                       } else {

@@ -23,10 +23,16 @@ class _MapTabState extends State<MapTab> {
   }
 
   Marker friend(name, hour, minut, lat, long, visibility) {
+    String minute;
+    if (minut < 10){
+      minute = "0$minut";
+    } else {
+      minute = minut.toString();
+    }
     return Marker(
         markerId: MarkerId(name),
         position: LatLng(lat, long),
-        infoWindow: InfoWindow(title: "$hour:$minut", snippet: name),
+        infoWindow: InfoWindow(title: "$hour:$minute", snippet: name),
         visible: visibility);
   }
 

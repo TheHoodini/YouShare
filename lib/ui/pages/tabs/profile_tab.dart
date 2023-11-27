@@ -4,6 +4,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:proychat/ui/controllers/authentication_controller.dart';
+import 'package:proychat/ui/controllers/location_controller.dart';
 import 'package:proychat/ui/controllers/user_controller.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -19,6 +21,8 @@ class _ProfileTabState extends State<ProfileTab> {
   final Color uiColor = const Color.fromARGB(255, 2, 11, 44);
 
   final TextEditingController _controller = TextEditingController();
+  AuthenticationController autController = Get.find();
+  LocationController locController = Get.find();
 
   IconData editIcon = Icons.border_color;
 
@@ -139,6 +143,20 @@ class _ProfileTabState extends State<ProfileTab> {
                         });
                         controller.setSalute(_controller.text);
                         controller.setIsEditing(false);
+                        autController.editUser(
+                            controller.name,
+                            controller.username,
+                            controller.salute,
+                            controller.email,
+                            controller.password,
+                            controller.key,
+                            controller.friends, [
+                          locController.userLocation.value.latitude,
+                          locController.userLocation.value.longitude,
+                          locController.lastActualization.hour,
+                          locController.lastActualization.minute,
+                          locController.markerVisibility
+                        ]);
                       },
                       style: const TextStyle(
                           color: Colors.white,

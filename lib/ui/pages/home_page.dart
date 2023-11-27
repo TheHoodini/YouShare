@@ -177,6 +177,7 @@ class _HomePageState extends State<HomePage> {
                   autController.editUser(
                       controller.name,
                       controller.username,
+                      controller.salute,
                       controller.email,
                       controller.password,
                       controller.key,
@@ -209,6 +210,7 @@ class _HomePageState extends State<HomePage> {
                 autController.editUser(
                     controller.name,
                     controller.username,
+                    controller.salute,
                     controller.email,
                     controller.password,
                     controller.key,
@@ -237,6 +239,7 @@ class _HomePageState extends State<HomePage> {
               autController.editUser(
                       controller.name,
                       controller.username,
+                      controller.salute,
                       controller.email,
                       controller.password,
                       controller.key,

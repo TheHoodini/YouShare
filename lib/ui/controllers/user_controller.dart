@@ -121,14 +121,14 @@ class UserController extends GetxController {
   }
 
   Future<void> updateUser(
-      name, username, email, uid, key, friendList, location) async {
+      name, username, salute, email, uid, key, friendList, location) async {
     logInfo("Updating user in realTime for $email and $uid");
     try {
       await databaseRef.child('userList').child(key).update({
         'name': name,
         'username': username,
         'email': email,
-        'salute': 'Using YouShare',
+        'salute': salute,
         'uid': uid,
         'key': key,
         'friendList': friendList,

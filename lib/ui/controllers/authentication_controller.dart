@@ -43,7 +43,7 @@ class AuthenticationController extends GetxController {
   }
 
   Future<void> editUser(
-      name, username, email, password, key, friendList, location) async {
+      name, username, salute, email, password, key, friendList, location) async {
     try {
       UserController userController = Get.find();
 
@@ -58,7 +58,7 @@ class AuthenticationController extends GetxController {
       }
 
       await userController.updateUser(
-          name, username, email, uid, key, friendList, location);
+          name, username, salute, email, uid, key, friendList, location);
       return Future.value();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
